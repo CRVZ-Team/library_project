@@ -1,0 +1,14 @@
+.logo {
+  font-family: "Shizuru";
+}
+
+.menu {
+  background-color: #556b2f;
+  color: white;
+  text-decoration: none;
+  opacity: 0.65;
+}
+
+.library-menu {
+  text-decoration: none;
+}
