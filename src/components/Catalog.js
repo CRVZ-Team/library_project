@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
+import Pagination from './general/pagination';
 
 
 function Catalog() {
@@ -104,7 +105,7 @@ function Catalog() {
         description: 'Louisa May Alcott`s highly original tale aimed at a young female market has iconic status in America and never been out of print.'
     }
 ]; 
-
+/*
     const [offset, setOffset] = useState(0);
     const [data, setData] = useState([]);
     const [perPage] = useState(4);
@@ -130,19 +131,44 @@ function Catalog() {
         getData();
     }, [offset]);
 
+*/
+
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [booksPerPage, setBookstPerPage] = useState(4);
+    /*
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setLoading(true);
+            const res = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
+            setProducts(res.data);
+            setLoading(false);
+        };
+        fetchProducts();
+      }, []);  //empty set to run only once
+    */
+
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = db_books.slice(indexOfFirstBook, indexOfLastBook);
+    
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    useEffect(() => {   
+        setBooks(currentBooks);
+    }, [currentBooks]);
+
 
     return (
         <>
             <Row xs={1} md={4} className="g-4">
-                {data}
+                {books.map(bk => 
+                <Col key={bk.id}>
+                    <CatalogItem book={bk} />
+                </Col>)}
+                <Pagination booksPerPage={booksPerPage} totalBooks={db_books.length} paginate={paginate} />
             </Row>
-            <ReactPaginate
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageCount={pageCount}
-                    previousLabel="< previous"
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"} />
         </>
     )
 }
