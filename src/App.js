@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Home from './components/Home';
 import Catalog from './components/Catalog';
 import { LoginPage } from './components/LoginPage';
+import { SignUpPage } from './components/SignUpPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </Router>
   );
