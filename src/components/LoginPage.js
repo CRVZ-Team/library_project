@@ -25,6 +25,7 @@ export const LoginPage = () => {
                 value={passwordValue}
                 onChange={e => setPasswordValue(e.target.value)}
                 placeholder="password" /></p>
+            <hr />
             <p><button 
                 disabled={!emailValue || !passwordValue}
                 onClick={onLoginClicked}>Log In</button></p>
