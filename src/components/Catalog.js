@@ -105,6 +105,7 @@ const db_books = [
     }
 ]; 
 
+
 function Catalog() {
 //pagination 
 /*
@@ -136,6 +137,7 @@ function Catalog() {
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
     const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
