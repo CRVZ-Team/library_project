@@ -3,10 +3,10 @@ import ReactPaginate from 'react-paginate';
 import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
+import Pagination from './general/pagination';
 
 
-function Catalog() {
-    const db_books = [
+const db_books = [
     {
         id: 1,
         photo: 'https://cdn6.tales.dk/00112/20775/cover.1568831349.jpg',
@@ -105,47 +105,102 @@ function Catalog() {
     }
 ]; 
 
-    const [offset, setOffset] = useState(0);
-    const [data, setData] = useState([]);
-    const [perPage] = useState(4);
-    const [pageCount, setPageCount] = useState(0);
+
+function Catalog() {
+//pagination 
+/*
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [booksPerPage, setBookstPerPage] = useState(4);
+
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = db_books.slice(indexOfFirstBook, indexOfLastBook);
+    
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    useEffect(() => {   
+        setBooks(currentBooks);
+    }, [currentBooks]);
+    */
 
 
-    const getData = () => {
-        const slice = db_books.slice(offset, offset + perPage);
-        const postData = slice.map(pd => 
-        <Col key={pd.id}>
-            <CatalogItem book={pd} />
-        </Col>);
-        setData(postData);
-        setPageCount(Math.ceil(db_books.length / perPage));
-    };
+//sorting
+    const [books, setBooks] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [booksPerPage, setBookstPerPage] = useState(4);
 
-    const handlePageClick = (e) => {
-        const selectedPage = e.selected;
-        setOffset(selectedPage + 1);
-    };
+    const [sortType, setSortType] = useState('book_id');
+
+
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
 
     useEffect(() => {
-        getData();
-    }, [offset]);
-
+        const sortArray = type => {
+        const types = {
+        book_id: 'book_id',
+        year: 'year',
+        author: 'author',
+        title: 'title',
+        };
+        const sortProperty = types[type];
+        if (sortProperty === 'author') {
+            const sorted = [...db_books].sort((a, b) => a.author.localeCompare(b.author));
+            console.log(" Sorted: By author");
+            setBooks(sorted);
+        }
+        else if (sortProperty === 'title') {
+        
+            const sorted = [...db_books].sort((a, b) => a.title.localeCompare(b.title));
+            console.log(" Sorted: By title");
+            setBooks(sorted);
+        }
+        else
+        {
+            const sorted = [...db_books].sort((a, b) => b[sortProperty] - a[sortProperty]);
+            console.log(" Sorted: By number");
+            setBooks(sorted);
+        }
+        
+        };
+        sortArray(sortType);
+    }, [sortType]); 
+            
 
     return (
         <>
-            <Row xs={1} md={4} className="g-4">
-                {data}
-            </Row>
-            <ReactPaginate
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageCount={pageCount}
-                    previousLabel="< previous"
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"} />
+            <div className="container align-items-center">
+                <div className='w-25 p-3 container'>
+                    <select className='form-select' onChange={(e) => setSortType(e.target.value)} >
+                        <option value="book_id">Book ID</option>
+                        <option value="year">Year</option>
+                        <option value="author">Author</option>
+                        <option value="title">Title</option>
+
+
+                    </select>   
+                </div>
+            
+                <Row xs={1} md={4} className="g-4">
+                    {currentBooks.map(bk => 
+                    <Col key={bk.id}>
+                        <CatalogItem book={bk} />
+                    </Col>)}
+                </Row>
+                <div className='w-25 p-3 container'>
+                    <Pagination booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate} />
+                </div>
+            </div>
         </>
     )
 }
+
 
 
 export default Catalog;
