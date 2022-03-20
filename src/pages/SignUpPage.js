@@ -13,13 +13,14 @@ export const SignUpPage = () => {
     const navigate = useNavigate();
 
     const onSignUpClicked = async () => {
-        const response = await axios.post('/api/signup', {
+        const response = await axios.post('http://127.0.0.1:8000/api/signup', {
             email: emailValue,
             password: passwordValue,
         });
         const { token } = response.data;
         setToken(token);
-        navigate('/welcome');
+        navigate('/please-verify');
+        //ADD: {!isVerified && <div className="faill">You won't be able ... until you verify your email</div>}
     } 
 
     return (
