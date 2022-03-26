@@ -7,6 +7,9 @@ import Home from './components/Home';
 import Catalog from './components/Catalog';
 import { LoginPage } from './components/LoginPage';
 import { SignUpPage } from './components/SignUpPage';
+import { PrivateRoute } from './auth/PrivateRoute';
+import { WelcomeUser } from './components/WelcomeUser';
+
 
 function App() {
   return (
@@ -15,11 +18,12 @@ function App() {
       <br/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/welcome' element={<WelcomeUser />} />
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
-        <Route path="/cart" element={<Home />} />
+        <Route path="/cart" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
