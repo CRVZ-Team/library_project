@@ -13,6 +13,8 @@ import { PleaseVerifyEmailPage} from './pages/PleaseVerifyEmailPage';
 import { EmailVerificationLandingPage} from './pages/EmailVerificationLandingPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage'; 
+import CartList from "./components/CartList";
+import CartFrame from './components/CartFrame';
 
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
-        <Route path="/cart" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/cart" element={<CartFrame />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path='/reset-password:passwordVerificationCode' element={<PasswordResetLandingPage />} />
         <Route path='/verify-email/:verificationString' element={<EmailVerificationLandingPage />} />
