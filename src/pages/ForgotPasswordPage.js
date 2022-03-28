@@ -10,7 +10,7 @@ export const ForgotPasswordPage = () => {
 
     const onSubmitClicked = async() => {
         try {
-            await axios.put(`https://mrs-whos-library-backend.herokuapp.com:5000/api/forgot-password/${emailValue}`);
+            await axios.put(`https://mrs-whos-library-backend.herokuapp.com/api/forgot-password/${emailValue}`);
             setSuccess(true);
             setTimeout(() => {
                 navigate('/login');
