@@ -34,32 +34,37 @@ export const LoginPage = () => {
 
     return (
         <div className="container text-center">
-            <h1>Log In</h1>
-            {errorMessage && <div className="fail">{errorMessage}</div> }
-            <p><input
-                value={emailValue}
-                onChange={e => setEmailValue(e.target.value)}
-                placeholder="someone@gmail.com" /></p>
-            <p><input
-                type="password"
-                value={passwordValue}
-                onChange={e => setPasswordValue(e.target.value)}
-                placeholder="password" /></p>
-            <hr />
-            <p><button 
-                disabled={!emailValue || !passwordValue}
-                onClick={onLoginClicked}>Log In</button></p>
-            <p><button onClick={() => navigate('/forgot-password')}>Forgot your password?</button></p>
-            <p><button onClick={() => navigate('/signup')} >Don't have an account? Sign Up</button></p>
-
-            <hr />
-
-            <h1>Log In with MitID</h1>
-            {errorMessage && <div className="fail">{errorMessage}</div> }
-            <div className="w-100">
-                <iframe src="https://mitid.eu.pythonanywhere.com/" style={mitid_style}>
-                </iframe>
+            <div className="row">
+                <div className="col mt-5">
+                <h1>Log In</h1>
+                {errorMessage && <div className="fail">{errorMessage}</div> }
+                <p><input
+                    value={emailValue}
+                    onChange={e => setEmailValue(e.target.value)}
+                    placeholder="someone@gmail.com" /></p>
+                <p><input
+                    type="password"
+                    value={passwordValue}
+                    onChange={e => setPasswordValue(e.target.value)}
+                    placeholder="password" /></p>
+                <hr />
+                <p><button 
+                    disabled={!emailValue || !passwordValue}
+                    onClick={onLoginClicked}>Log In</button></p>
+                <p><button onClick={() => navigate('/forgot-password')}>Forgot your password?</button></p>
+                <p><button onClick={() => navigate('/signup')} >Don't have an account? Sign Up</button></p>
             </div>
+            
+            <div className="col mt-5">
+                <h1>Log In with MitID</h1>
+                {errorMessage && <div className="fail">{errorMessage}</div> }
+                <div>
+                    <iframe src="https://mitid.eu.pythonanywhere.com/" style={mitid_style}>
+                    </iframe>
+                </div>
+            </div>
+            </div>
+            
         </div>
     )
 

@@ -11,6 +11,8 @@ import { PrivateRoute } from './auth/PrivateRoute';
 import { WelcomeUser } from './pages/WelcomeUser';
 import { PleaseVerifyEmailPage} from './pages/PleaseVerifyEmailPage';
 import { EmailVerificationLandingPage} from './pages/EmailVerificationLandingPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
+import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage'; 
 
 
 function App() {
@@ -27,9 +29,11 @@ function App() {
         <Route path="/contact" element={<Home />} />
         <Route path="/cart" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path='/reset-password:passwordVerificationCode' element={<PasswordResetLandingPage />} />
         <Route path='/verify-email/:verificationString' element={<EmailVerificationLandingPage />} />
         <Route path='/please-verify' element={<PleaseVerifyEmailPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
       </Routes>
     </Router>
   );
