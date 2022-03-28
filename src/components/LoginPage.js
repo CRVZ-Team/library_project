@@ -17,8 +17,8 @@ export const LoginPage = () => {
             password: passwordValue,
         });
 
-        const { token } = response.data;
-        setToken(token);
+        //const { token } = response.data;
+        //setToken(token);
         navigate("/welcome");
         window.location.reload(false);
     } 

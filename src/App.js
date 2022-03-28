@@ -9,6 +9,8 @@ import { LoginPage } from './components/LoginPage';
 import { SignUpPage } from './components/SignUpPage';
 import { PrivateRoute } from './auth/PrivateRoute';
 import { WelcomeUser } from './components/WelcomeUser';
+import CartList from "./components/CartList";
+import CartFrame from './components/CartFrame';
 
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
-        <Route path="/cart" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/cart" element={<CartFrame />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
