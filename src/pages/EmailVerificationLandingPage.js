@@ -14,7 +14,7 @@ export const EmailVerificationLandingPage = () => {
     useEffect(() => {
         const loadVerification = async () => {
             try {
-                const response = await axios.put('https://mrs-whos-library-backend.herokuapp.com:5000/api/verify-email', { verificationString });
+                const response = await axios.put('https://mrs-whos-library-backend.herokuapp.com/api/verify-email', { verificationString });
                 const { token } = response;
                 setToken(token);
                 setIsSuccess(true);

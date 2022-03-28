@@ -6,9 +6,8 @@ export const useUser = () => {
     const [token] = useToken();
 
     const getPayloadFromToken = token => {
-        const encodedPayload = token.split('.')[1];
-        console.log(encodedPayload);
-        return JSON.parse(jwt_decode(encodedPayload));
+        const encodedPayload = token.split(".")[1];
+        return jwt_decode(token);
     }
 
     const [user,setUser] = useState(() => {
