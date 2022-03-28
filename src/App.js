@@ -31,7 +31,7 @@ function App() {
         <Route path="/contact" element={<Home />} />
         <Route path="/cart" element={<CartFrame />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path='/reset-password:passwordVerificationCode' element={<PasswordResetLandingPage />} />
+        <Route path='/reset-password/:passwordResetCode' element={<PasswordResetLandingPage />} />
         <Route path='/verify-email/:verificationString' element={<EmailVerificationLandingPage />} />
         <Route path='/please-verify' element={<PleaseVerifyEmailPage />} />
         <Route path="/signup" element={<SignUpPage />} />
