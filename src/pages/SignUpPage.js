@@ -13,7 +13,7 @@ export const SignUpPage = () => {
     const navigate = useNavigate();
 
     const onSignUpClicked = async () => {
-        const response = await axios.post('http://127.0.0.1:8000/api/signup', {
+        const response = await axios.post('https://mrs-whos-library-backend:5000/api/signup', {
             email: emailValue,
             password: passwordValue,
         });
