@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useToken } from "../auth/useToken";
 import "bootstrap/dist/css/bootstrap.css";
 
 export const LoginPage = () => {
+    const [token, setToken] = useToken();
     const [errorMessage, setErrorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const onLoginClicked = async () => {
-        alert("Log in not implemented");
+        const response = await axios.post('http://127.0.0.1:8000/api/login', {
+            email: emailValue,
+            password: passwordValue,
+        });
+
+        //const { token } = response.data;
+        //setToken(token);
+        navigate("/welcome");
+        window.location.reload(false);
     } 
 
     const mitid_style = {
@@ -38,8 +49,8 @@ export const LoginPage = () => {
             <p><button 
                 disabled={!emailValue || !passwordValue}
                 onClick={onLoginClicked}>Log In</button></p>
-            <p><button onClick={() => history('/forgot-password')}>Forgot your password?</button></p>
-            <p><button onClick={() => history('/signup')} >Don't have an account? Sign Up</button></p>
+            <p><button onClick={() => navigate('/forgot-password')}>Forgot your password?</button></p>
+            <p><button onClick={() => navigate('/signup')} >Don't have an account? Sign Up</button></p>
 
             <hr />
 

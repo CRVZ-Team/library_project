@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToken } from "../auth/useToken";
+import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 
 export const SignUpPage = () => {
+    const [token, setToken] = useToken();
     const [errorMessage, setErrorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
     const [confirmPasswordValue, setConfirmPasswordValue ] = useState('');
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const onSignUpClicked = async () => {
-        alert("Sign Up not implemented");
+        const response = await axios.post('/api/signup', {
+            email: emailValue,
+            password: passwordValue,
+        });
+        const { token } = response.data;
+        setToken(token);
+        navigate('/welcome');
     } 
 
     return (
@@ -38,7 +47,7 @@ export const SignUpPage = () => {
                     passwordValue !== confirmPasswordValue
                 }
                 onClick={onSignUpClicked}>Sign Up</button></p>
-            <p><button onClick={() => history('/login')} >Already have an account? Log In</button></p>
+            <p><button onClick={() => navigate('/login')} >Already have an account? Log In</button></p>
         </div>
     )
 }
