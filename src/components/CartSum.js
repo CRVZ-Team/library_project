@@ -6,16 +6,26 @@ import CartItem from "./CartItem";
 import CartList from "./CartList";
 import "bootstrap/dist/css/bootstrap.css";
 
-const CartFrame = () => (
+const CartFrame = ({sum}) => (
     <div class="container" style={card}>
-        <h4>Check out your cart </h4>
-        <h3>Price: 23.4$</h3>
-        <button class="btn btn-primary">Checkout</button>
+        
+        {sum == 0 ? 
+            <>
+                
+            </>
+        :
+            <>
+                <h4>Check out your cart </h4>
+                <h3>Total sum: {sum}$</h3>
+                <button class="btn btn-success">Checkout</button>
+                <hr></hr>
+            </>
+        }
     </div>
 )
 
 const card = {
-    border: '1px solid black',
+
 }
 
 export default CartFrame;

@@ -8,17 +8,32 @@ import CartSum from "./CartSum";
 import "bootstrap/dist/css/bootstrap.css";
 
 
-const CartFrame = () => (
-    <div>
-        <div class="row">
-            <div class="col-sm-9" >
-                <CartList />
-            </div>
-            <div class="col-sm-3" >
-                <CartSum />
+
+function CartFrame() {
+
+    const [overalSum, setOveralSum] = useState('0');
+
+    function get_sum(sum) {
+        if (sum == null) {
+            setOveralSum(0);
+            console.log("sum is null");
+        } else {
+            setOveralSum(sum);
+        }
+    }
+
+    return (
+        <div>
+            <div class="row">
+                <div class="col-sm-9" >
+                    <CartList get_sum={get_sum}/>
+                </div>
+                <div class="col-sm-3" >
+                    <CartSum sum={overalSum}/>
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default CartFrame;

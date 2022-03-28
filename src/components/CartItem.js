@@ -10,40 +10,40 @@ function MouseOut(event){
     event.target.style.background = '#ffffff';
 }
 
-function handleRemove(id) {
-
-}
-
-
-const CartItem = ({book}) => (
+const CartItem = ({book, removeBook}) => (
     <div class="container" style={card}>
         <div class="row">
-            <div class="col-sm-3" style={photo}>
-                <p>Photo</p>
+            <div class="col-sm-3 d-flex justify-content-center text-center" >
+                <img src={book.photo} style={photo}/>
             </div>
             <div class="col-sm-9" style={text}>
                 <div class="row">
-                    <div class="col-sm-9 text-start" style={text}>
+                    <div class="col-sm-9 text-start">
                         <h5>Title: {book.title}</h5>
                         <h6>Author: {book.author} | Year: {book.year}</h6>
+                        <h5>Price: {book.price}$</h5>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-9 text-start" style={text}>
+                    <div class="col-sm-9 text-start">
                         <h6>Description: {book.description}</h6>
                     </div>
                     <div class="col-sm-3">
-                        <button onClick={handleRemove(book.id)} onMouseOver={MouseOver} onMouseOut={MouseOut} type="button" class="btn btn-light"  style={remove_button}>Remove</button>
+                        <button onClick={() => removeBook(book.id)} onMouseOver={MouseOver} onMouseOut={MouseOut} type="button" class="btn btn-light"  style={remove_button}>Remove</button>
                     </div>
                 </div>
             </div>
         </div>
+        <hr/>
     </div>
 )
 
 const photo ={
-    background: '#556b2f',
-    opacity: '0.65',
+    marginTop: '10%',
+    width: '80%',
+    display: 'block',
+    height: '80%',
+    backgroundImage: 'linear-gradient(to right, #ffffff, #556b2f)',
 }
 
 const text = {
@@ -54,7 +54,6 @@ const text = {
 const card = {
     marginBottom: '5px',
     marginTop: '5px',
-    border: '1px solid #bdbebf',
 }
 
 const remove_button = {
