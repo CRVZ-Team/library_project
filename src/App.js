@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/Home';
-import Catalog from './components/Catalog';
+import CatalogFrame from './components/CatalogFrame';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { PrivateRoute } from './auth/PrivateRoute';
@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/welcome' element={<WelcomeUser />} />
-        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog" element={<CatalogFrame />} />
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />

@@ -106,7 +106,7 @@ const db_books = [
 ]; 
 
 
-function Catalog() {
+function CatalogList() {
 //pagination 
 /*
     const [books, setBooks] = useState([]);
@@ -203,4 +203,4 @@ function Catalog() {
 
 
 
-export default Catalog;
+export default CatalogList;
