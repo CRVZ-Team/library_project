@@ -3,12 +3,16 @@ import './App.css';
 import NavBar from "./components/NavBar";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
-import Home from './components/Home';
+import Home from './pages/Home';
 import Catalog from './components/Catalog';
-import { LoginPage } from './components/LoginPage';
-import { SignUpPage } from './components/SignUpPage';
+import { LoginPage } from './pages/LoginPage';
+import { SignUpPage } from './pages/SignUpPage';
 import { PrivateRoute } from './auth/PrivateRoute';
-import { WelcomeUser } from './components/WelcomeUser';
+import { WelcomeUser } from './pages/WelcomeUser';
+import { PleaseVerifyEmailPage} from './pages/PleaseVerifyEmailPage';
+import { EmailVerificationLandingPage} from './pages/EmailVerificationLandingPage';
+import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
+import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage'; 
 import CartList from "./components/CartList";
 import CartFrame from './components/CartFrame';
 
@@ -27,7 +31,11 @@ function App() {
         <Route path="/contact" element={<Home />} />
         <Route path="/cart" element={<CartFrame />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path='/reset-password/:passwordResetCode' element={<PasswordResetLandingPage />} />
+        <Route path='/verify-email/:verificationString' element={<EmailVerificationLandingPage />} />
+        <Route path='/please-verify' element={<PleaseVerifyEmailPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
       </Routes>
     </Router>
   );

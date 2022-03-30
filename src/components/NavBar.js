@@ -1,10 +1,8 @@
 import { GiOwl } from "react-icons/gi";
-import { FaQuestion } from "react-icons/fa";
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import './NavBar.css';
 import { useUser } from "../auth/useUser";
-import { useEffect } from "react";
 
 const linkStyle = {
     textDecoration: 'none',
