@@ -29,8 +29,53 @@ function CatalogSideBar()
             <h2>Filters</h2>
             <hr></hr>
             <ul class="nav nav-pills flex-column mb-auto"> 
-                <h5>Book based</h5>
+                <h4>Book based</h4>
                 <li class="nav-item" >
+                <h5>Book attributes</h5>
+                <h7>Author</h7>
+                    <div style={scrollable_small}>
+                        <ul>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Jozo
+                            </label>
+                        </ul>
+                        <ul>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Jozo
+                            </label>
+                        </ul>
+                        <ul>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Jozo
+                            </label>
+                        </ul>
+                        <ul>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Jozo
+                            </label>
+                        </ul>
+                        <ul>
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Jozo
+                            </label>
+                        </ul>
+                    </div>
+                    <h7>Year</h7>
+                    <div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
+                            <input type="number"  max="2022" min="0" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                        </div>
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Till</span>
+                            <input type="number"  max="2022" min="0" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                        </div>
+                    </div>
                     <h7>Genre</h7>
                     <div style={scrollable_small}>
                         <ul>
@@ -72,7 +117,7 @@ function CatalogSideBar()
                     </div>
                 </li>
                 <br/>
-                <h5>User based</h5>
+                <h4>User based</h4>
                 <li class="nav-item" >
                     <div style={scrollable_small}>
                         <ul>
@@ -93,9 +138,7 @@ function CatalogSideBar()
             </ul>
             <hr></hr>
         </div>
-        
     </>
-    
     )
 }
 

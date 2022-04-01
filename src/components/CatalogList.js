@@ -4,6 +4,7 @@ import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
 import Pagination from './general/pagination';
+import { useSearchParams } from 'react-router-dom';
 
 
 const db_books = [
@@ -132,16 +133,39 @@ function CatalogList() {
     const [booksPerPage, setBookstPerPage] = useState(4);
 
     const [sortType, setSortType] = useState('book_id');
+    const [searchType, setSearchType] = useState();
 
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
     const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
+    const [searchParam, setSearchParam] = useSearchParams();
+
+    const searchTerm = searchParam.get('param') || '';  //set the varible name which we are looking for
+
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    useEffect(() => {
+    const handleSearch = Event => {
+        const param = Event.target.value; 
+        //const needs to carry the same name as in .get()   /// otherwise it wont work
+    
+        if(param.length >= 0) {
+            setSearchParam({param});
+            var search_res = [...db_books].filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
+            console.log("Search array")
+            console.log(search_res)
+        }
+        else{
+            setSearchParam({});
+        }
+        setBooks(search_res);
+        console.log("Current Books:");
+        console.log(currentBooks);
+    };
+
+  /*  useEffect(() => {
         const sortArray = type => {
         const types = {
         book_id: 'book_id',
@@ -171,27 +195,29 @@ function CatalogList() {
         };
         sortArray(sortType);
     }, [sortType]); 
-            
+    */
 
     return (
         <>
             <div className="container align-items-center">
                 <div className='w-25 p-3 container'>
-                    <select className='form-select' onChange={(e) => setSortType(e.target.value)} >
-                        <option value="book_id">Book ID</option>
-                        <option value="year">Year</option>
-                        <option value="author">Author</option>
-                        <option value="title">Title</option>
-
-
-                    </select>   
+                    <input type="text" className="form-control" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm}/>
                 </div>
             
                 <Row xs={1} md={4} className="g-4">
-                    {currentBooks.map(bk => 
-                    <Col key={bk.id}>
-                        <CatalogItem book={bk} />
-                    </Col>)}
+                {currentBooks.length > 0 ?
+                    <>
+                        {currentBooks.map(bk => 
+                        <Col key={bk.id}>
+                            <CatalogItem book={bk} />
+                        </Col>)}
+                    </>
+                : 
+                    <div className="container">
+                        <h1>We are sorry...</h1>
+                        <p>No books with this search request can be found. Please try again with different input.</p>
+                    </div>
+                }
                 </Row>
                 <div className='w-25 p-3 container'>
                     <Pagination booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate} />
