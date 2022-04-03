@@ -107,6 +107,10 @@ const db_books = [
 ]; 
 
 var currentBooks = [...db_books];
+var list_size = db_books.length;
+var reload_counter = 0;
+var search_enabled = false;
+var book_list = [];
 
 function CatalogList() {
 //pagination 
@@ -150,36 +154,37 @@ function CatalogList() {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     const handleSearch = Event => {
+        search_enabled = true;
         const param = Event.target.value; 
         //const needs to carry the same name as in .get()   /// otherwise it wont work
     
         if(param.length >= 0) {
             setSearchParam({param});
             var search_res = [...db_books].filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
-            console.log("Search array")
-            console.log(search_res)
         }
         else {
             setSearchParam({param: ''});
+            console.log("Empty search")
             var search_res = [...db_books];
         }
 
-
-        setBooks(search_res);
-        currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-        console.log("Current Books:");
-        console.log(currentBooks);
+        book_list = search_res;
+        list_size = search_res.length;
+        console.log("Current book END OF SEARCH")
+        console.log(book_list)
     };
 
     function populate_books(search) {
-        if(search.length >= 0) {
-            console.log("Not poulating");
-            console.log(search);
+        if(!search_enabled) {
+            if(search.length >= 0) {
+                console.log("current books in POPULATE")
+                currentBooks = [...db_books].slice(indexOfFirstBook, indexOfLastBook);
+            }
         }
-        else {
-
-            console.log("Populate books");  
-            currentBooks = [...db_books];
+        else{
+            console.log("Populate in else")
+            currentBooks = book_list.slice(indexOfFirstBook, indexOfLastBook);
+            console.log(currentBooks)
         }
     };
 
@@ -225,14 +230,13 @@ function CatalogList() {
                 </div>
             
                 <Row xs={1} md={4} className="g-4">
-                {currentBooks.map(bk => 
-                <Col key={bk.id}>
-                    <CatalogItem book={bk} />
-                </Col>)}
-                
+                    {currentBooks.map(bk => 
+                    <Col key={bk.id}>
+                        <CatalogItem book={bk} />
+                    </Col>)}
                 </Row>
                 <div className='w-25 p-3 container'>
-                    <Pagination booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate} />
+                    <Pagination booksPerPage={booksPerPage} totalBooks={list_size} paginate={paginate} />
                 </div>
             </div>
         </>
