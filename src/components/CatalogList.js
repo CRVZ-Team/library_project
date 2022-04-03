@@ -106,6 +106,7 @@ const db_books = [
     }
 ]; 
 
+var currentBooks = [...db_books];
 
 function CatalogList() {
 //pagination 
@@ -138,7 +139,8 @@ function CatalogList() {
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+    //make global variable 
+
 
     const [searchParam, setSearchParam] = useSearchParams();
 
@@ -157,13 +159,30 @@ function CatalogList() {
             console.log("Search array")
             console.log(search_res)
         }
-        else{
-            setSearchParam({});
+        else {
+            setSearchParam({param: ''});
+            var search_res = [...db_books];
         }
+
+
         setBooks(search_res);
+        currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
         console.log("Current Books:");
         console.log(currentBooks);
     };
+
+    function populate_books(search) {
+        if(search.length >= 0) {
+            console.log("Not poulating");
+            console.log(search);
+        }
+        else {
+
+            console.log("Populate books");  
+            currentBooks = [...db_books];
+        }
+    };
+
 
   /*  useEffect(() => {
         const sortArray = type => {
@@ -199,25 +218,18 @@ function CatalogList() {
 
     return (
         <>
+            {populate_books(searchTerm)}
             <div className="container align-items-center">
                 <div className='w-25 p-3 container'>
                     <input type="text" className="form-control" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm}/>
                 </div>
             
                 <Row xs={1} md={4} className="g-4">
-                {currentBooks.length > 0 ?
-                    <>
-                        {currentBooks.map(bk => 
-                        <Col key={bk.id}>
-                            <CatalogItem book={bk} />
-                        </Col>)}
-                    </>
-                : 
-                    <div className="container">
-                        <h1>We are sorry...</h1>
-                        <p>No books with this search request can be found. Please try again with different input.</p>
-                    </div>
-                }
+                {currentBooks.map(bk => 
+                <Col key={bk.id}>
+                    <CatalogItem book={bk} />
+                </Col>)}
+                
                 </Row>
                 <div className='w-25 p-3 container'>
                     <Pagination booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate} />
