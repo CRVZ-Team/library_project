@@ -15,6 +15,7 @@ import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage'; 
 import CartList from "./components/CartList";
 import CartFrame from './components/CartFrame';
+import { Book } from './pages/Book';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path='/welcome' element={<WelcomeUser />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/book/:id" element={<Book />} />
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
