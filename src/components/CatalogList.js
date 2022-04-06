@@ -4,6 +4,7 @@ import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
 import Pagination from './general/pagination';
+import { useSearchParams } from 'react-router-dom';
 
 
 const db_books = [
@@ -105,8 +106,13 @@ const db_books = [
     }
 ]; 
 
+var currentBooks = [...db_books];
+var list_size = db_books.length;
+var reload_counter = 0;
+var search_enabled = false;
+var book_list = [];
 
-function Catalog() {
+function CatalogList() {
 //pagination 
 /*
     const [books, setBooks] = useState([]);
@@ -132,16 +138,58 @@ function Catalog() {
     const [booksPerPage, setBookstPerPage] = useState(4);
 
     const [sortType, setSortType] = useState('book_id');
+    const [searchType, setSearchType] = useState();
 
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+    //make global variable 
+
+
+    const [searchParam, setSearchParam] = useSearchParams();
+
+    const searchTerm = searchParam.get('param') || '';  //set the varible name which we are looking for
 
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    useEffect(() => {
+    const handleSearch = Event => {
+        search_enabled = true;
+        const param = Event.target.value; 
+        //const needs to carry the same name as in .get()   /// otherwise it wont work
+    
+        if(param.length >= 0) {
+            setSearchParam({param});
+            var search_res = [...db_books].filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
+        }
+        else {
+            setSearchParam({param: ''});
+            console.log("Empty search")
+            var search_res = [...db_books];
+        }
+
+        book_list = search_res;
+        list_size = search_res.length;
+        console.log("Current book END OF SEARCH")
+        console.log(book_list)
+    };
+
+    function populate_books(search) {
+        if(!search_enabled) {
+            if(search.length >= 0) {
+                console.log("current books in POPULATE")
+                currentBooks = [...db_books].slice(indexOfFirstBook, indexOfLastBook);
+            }
+        }
+        else{
+            console.log("Populate in else")
+            currentBooks = book_list.slice(indexOfFirstBook, indexOfLastBook);
+            console.log(currentBooks)
+        }
+    };
+
+
+  /*  useEffect(() => {
         const sortArray = type => {
         const types = {
         book_id: 'book_id',
@@ -171,20 +219,14 @@ function Catalog() {
         };
         sortArray(sortType);
     }, [sortType]); 
-            
+    */
 
     return (
         <>
+            {populate_books(searchTerm)}
             <div className="container align-items-center">
                 <div className='w-25 p-3 container'>
-                    <select className='form-select' onChange={(e) => setSortType(e.target.value)} >
-                        <option value="book_id">Book ID</option>
-                        <option value="year">Year</option>
-                        <option value="author">Author</option>
-                        <option value="title">Title</option>
-
-
-                    </select>   
+                    <input type="text" className="form-control" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm}/>
                 </div>
             
                 <Row xs={1} md={4} className="g-4">
@@ -194,7 +236,7 @@ function Catalog() {
                     </Col>)}
                 </Row>
                 <div className='w-25 p-3 container'>
-                    <Pagination booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate} />
+                    <Pagination booksPerPage={booksPerPage} totalBooks={list_size} paginate={paginate} />
                 </div>
             </div>
         </>
@@ -203,4 +245,4 @@ function Catalog() {
 
 
 
-export default Catalog;
+export default CatalogList;
