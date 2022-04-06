@@ -1,0 +1,106 @@
+.img-book {
+    width: 100%;
+    max-width: 350px;
+    min-width: 125px;
+    height: auto;
+  }
+
+  .book {
+    position: relative;
+    width: 77%;
+    height: 104%;
+    margin-top: 3%;
+    left: 10%;
+
+    font-family: 'Forum';
+    font-style: normal;
+    font-size: 0;
+  }
+
+  .title-book {
+    font-size: 36px;
+    line-height: 40px;
+    align-items: center;
+  }
+
+  .author-book {
+    font-size: 26px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+  }
+
+  .desc-book {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .spec-book {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .btn {
+    margin: 2%;
+    font-weight: bold;
+  }
+
+  .first {
+    width: 30%;
+    font-size: 1 rem;
+    display: inline-block;
+  }
+
+  .second {
+    position: absolute;
+    left: 35%;
+    width: 65%;
+    display: inline-block;
+    font-size: 1rem;
+  }
+
+  .float-l {
+    float: left;
+  }
+
+  .float-r {
+    float: right;
+  }
+
+  .star {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .on {
+    color: #000;
+  }
+  .off {
+    color: #ccc;
+  }
+
+  label {
+    font-size: 18px;
+  }
+  @media only screen and (max-width: 480px) {
+    .second {
+      left: 45%;
+    }
+    .desc-book {
+      font-size: 18px;
+      line-height: 22px;
+    }
+    .spec-book {
+      font-size: 18px;
+      line-height: 22px;
+    }
+    .title-book {
+      font-size: 30px;
+      line-height: 34px;
+    }
+    .author-book {
+      font-size: 24px;
+      line-height: 28px;
+    }  
+  }
