@@ -13,6 +13,14 @@ function CatalogSideBar()
     const[genres, setGenres] = useState([]);
     const[years, setYears] = useState([]);
 
+    const filters ={
+        authors: {},
+        genres: {},
+        years: []
+    }
+
+    const checked_authors = [];
+
     useEffect(() => {
         getAuthors();
     }, []);
@@ -44,6 +52,22 @@ function CatalogSideBar()
         maxHeight: 'calc(100vh - 600px)',
         overflowY: 'auto',
     }
+
+    const get_value = (e) => {
+
+        checked_authors.push(e.target.value);
+        console.log("Checked authors");
+        console.log(checked_authors);
+
+        
+        //make it as  a list .. check eact time for entry 
+        //for each filter option 
+        //query each list 
+        filters.authors['name'] = checked_authors[0];
+        console.log("Dict authors");
+
+        console.log(filters.authors);
+    }
     
 
     return(
@@ -59,7 +83,7 @@ function CatalogSideBar()
                     <div style={scrollable_small}>
                         {authors.map(author => (
                             <ul>
-                                <input class="form-check-input" type="checkbox" value={author.name} id="flexCheckDefault"/>
+                                <input class="form-check-input"  type="checkbox" value={author.name} onClick={get_value} id="flexCheckDefault"/>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {author.name}
                                 </label>
@@ -70,11 +94,11 @@ function CatalogSideBar()
                     <div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
-                            <input type="number" max={years[0].max} min={years[0].min} class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                            <input type="number"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                         </div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Till</span>
-                            <input type="number"   max={years[0].max} min={years[0].min} class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                            <input type="number"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                         </div>
                     </div>
                     <h7>Genre</h7>

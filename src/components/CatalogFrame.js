@@ -14,6 +14,9 @@ function CatalogFrame() {
         width: '25%',
     }
 
+    const body = {
+    }
+
     /*
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={side}>
             <CatalogSideBar/>
@@ -21,8 +24,8 @@ function CatalogFrame() {
     */
 
     return(
-    <>
-        <div class="row">
+    <div className='container'>
+        <div class="row" style={body}>
             <div class="col-sm-2" >
                 <CatalogSideBar/>
             </div>
@@ -30,7 +33,7 @@ function CatalogFrame() {
                 <CatalogList/>
             </div>
         </div>
-    </>
+    </div>
     )
 }
 

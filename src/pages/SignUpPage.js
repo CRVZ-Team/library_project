@@ -13,7 +13,7 @@ export const SignUpPage = () => {
     const navigate = useNavigate();
 
     const onSignUpClicked = async () => {
-        const response = await axios.post('https://mrs-whos-library-backend.herokuapp.com/api/signup', {
+        const response = await axios.post('http://localhost:8080/api/signup', {
             email: emailValue,
             password: passwordValue,
         });

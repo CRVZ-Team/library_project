@@ -23,7 +23,7 @@ export const Book = () => {
     }, []);
 
     const getData = async () => {
-        const { data } = await axios.get(`https://mrs-whos-library-backend.herokuapp.com/api/book/${id}`);
+        const { data } = await axios.get(`http://localhost:8080/api/book/${id}`);
         setData(data);
         setBook(data.book);
         setGenres(data.genres);
@@ -33,7 +33,7 @@ export const Book = () => {
 
     const onSubmitClicked = async () => {
         console.log(user.id);
-        const { data } = await axios.post("https://mrs-whos-library-backend.herokuapp.com/api/comment", {
+        const { data } = await axios.post("http://localhost:8080/api/comment", {
             rating,
             comment,
             book_id: book.id,

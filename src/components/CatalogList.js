@@ -135,7 +135,7 @@ function CatalogList() {
 //sorting
     const [books, setBooks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [booksPerPage, setBookstPerPage] = useState(4);
+    const [booksPerPage, setBookstPerPage] = useState(8);
 
     const [sortType, setSortType] = useState('book_id');
     const [searchType, setSearchType] = useState();
@@ -229,7 +229,7 @@ function CatalogList() {
                     <input type="text" className="form-control" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm}/>
                 </div>
             
-                <Row xs={1} md={4} className="g-4">
+                <Row xs={4} md={8} className="g-4">
                     {currentBooks.map(bk => 
                     <Col key={bk.id}>
                         <CatalogItem book={bk} />
