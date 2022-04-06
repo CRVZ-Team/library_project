@@ -11,7 +11,7 @@ const CatalogItem = ({book}) => (
     <>
         <a href={`/book/${book.id}`} style={href}>
             <Card border="dark">
-                <Card.Img src={book.photo}/>
+                <Card.Img src={book.image_url}/>
                 <Card.Body>
                     <Card.Title>{book.title} {book.id}</Card.Title>
                     <Card.Subtitle>{book.author},  {book.year}</Card.Subtitle>

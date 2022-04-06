@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
 import Pagination from './general/pagination';
 import { useSearchParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 const db_books = [
@@ -106,8 +107,7 @@ const db_books = [
     }
 ]; 
 
-var currentBooks = [...db_books];
-var list_size = db_books.length;
+var currentBooks;
 var reload_counter = 0;
 var search_enabled = false;
 var book_list = [];
@@ -143,7 +143,20 @@ function CatalogList() {
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    var list_size;
+
     //make global variable 
+
+    useEffect(() => {
+        getData();
+    }, []);	
+
+    const getData = async() => {
+        console.log("normal word");
+        const { data } = await axios.get('http://localhost:8080/api/books');
+        setBooks(data);
+        console.log(data);
+    };
 
 
     const [searchParam, setSearchParam] = useSearchParams();
@@ -160,28 +173,28 @@ function CatalogList() {
     
         if(param.length >= 0) {
             setSearchParam({param});
-            var search_res = [...db_books].filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
+            book_list = books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
         }
         else {
             setSearchParam({param: ''});
             console.log("Empty search")
-            var search_res = [...db_books];
+            book_list = books;
         }
-
-        book_list = search_res;
-        list_size = search_res.length;
         console.log("Current book END OF SEARCH")
         console.log(book_list)
+        console.log(list_size)
     };
 
     function populate_books(search) {
         if(!search_enabled) {
+            list_size = books.length;
             if(search.length >= 0) {
                 console.log("current books in POPULATE")
-                currentBooks = [...db_books].slice(indexOfFirstBook, indexOfLastBook);
+                currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
             }
         }
         else{
+            list_size = book_list.length;
             console.log("Populate in else")
             currentBooks = book_list.slice(indexOfFirstBook, indexOfLastBook);
             console.log(currentBooks)
