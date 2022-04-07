@@ -78,19 +78,17 @@ function CatalogSideBar()
             <ul class="nav nav-pills flex-column mb-auto"> 
                 <h4>Book based</h4>
                 <li class="nav-item" >
-                <h5>Book attributes</h5>
-                <h7>Authors</h7>
-                    <div style={scrollable_small}>
-                        {authors.map(author => (
-                            <ul>
-                                <input class="form-check-input"  type="checkbox" value={author.name} onClick={get_value} id="flexCheckDefault"/>
-                                <label class="form-check-label" for="flexCheckDefault">
+                <h5>Authors</h5>
+                    <div style={scrollable}>
+                        {authors.map(author => ( 
+                            <div>
+                                <input class="form-check-input" type="checkbox" value={author.name} onClick={get_value} id="flexCheckDefault" /><label class="form-check-label" for="flexCheckDefault">
                                     {author.name}
                                 </label>
-                            </ul>
+                            </div>
                         ))}                        
                     </div>
-                    <h7>Year</h7>
+                    <h5>Year</h5>
                     <div>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
@@ -101,15 +99,15 @@ function CatalogSideBar()
                             <input type="number"    class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
                         </div>
                     </div>
-                    <h7>Genre</h7>
+                    <h5>Genre</h5>
                     <div style={scrollable_small}>
                         {genres.map(genre => (
-                            <ul>
+                            <div>
                                 <input class="form-check-input" type="checkbox" value={genre.name} id="flexCheckDefault"/>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {genre.name}
                                 </label>
-                            </ul>
+                            </div>
                         ))}
                         
                     </div>
@@ -118,18 +116,18 @@ function CatalogSideBar()
                 <h4>User based</h4>
                 <li class="nav-item" >
                     <div style={scrollable_small}>
-                        <ul>
+                        <div>
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 Highest rating
                             </label>
-                        </ul>
-                        <ul>
+                        </div>
+                        <div>
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 Most taken
                             </label>
-                        </ul>
+                        </div>
                     </div>
                 </li>
                 

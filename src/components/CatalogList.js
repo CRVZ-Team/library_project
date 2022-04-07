@@ -234,12 +234,17 @@ function CatalogList() {
     }, [sortType]); 
     */
 
+    const form = {
+        border: 'none',
+        borderBottom: '1px solid #556b2f',
+    }
+
     return (
         <>
             {populate_books(searchTerm)}
             <div className="container align-items-center">
                 <div className='w-25 p-3 container'>
-                    <input type="text" className="form-control" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm}/>
+                    <input type="text" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm} style={form}/>
                 </div>
             
                 <Row xs={4} md={8} className="g-4">
