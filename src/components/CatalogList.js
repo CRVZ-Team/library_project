@@ -237,6 +237,7 @@ function CatalogList() {
     const form = {
         border: 'none',
         borderBottom: '1px solid #556b2f',
+        
     }
 
     return (

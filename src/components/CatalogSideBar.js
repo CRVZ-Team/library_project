@@ -31,11 +31,6 @@ function CatalogSideBar()
         setAuthors(res.data[0].authors);
         setYears(res.data[1].year_span);
         setGenres(res.data[2].genres);
-        console.log("years");
-        console.log(res.data[1].year_span[0].max);
-        console.log(res.data[2]);
-
-        console.log(years[0].max);
     };
     
     const side = {
@@ -82,28 +77,27 @@ function CatalogSideBar()
                     <div style={scrollable}>
                         {authors.map(author => ( 
                             <div>
-                                <input class="form-check-input" type="checkbox" value={author.name} onClick={get_value} id="flexCheckDefault" /><label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value={author.name} onChange={get_value} id="author" /><label class="form-check-label" for="flexCheckDefault">
                                     {author.name}
                                 </label>
                             </div>
                         ))}                        
                     </div>
                     <h5>Year</h5>
-                    <div>
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
-                            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+                        <div style={scrollable}>
+                            {years.map(year => (
+                                <div>
+                                    <input class="form-check-input" type="checkbox"  onChange={get_value} id="year" /><label class="form-check-label" for="flexCheckDefault">
+                                        {year}
+                                    </label>
+                                </div>
+                            ))}
                         </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Till</span>
-                            <input type="number"    class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-                        </div>
-                    </div>
                     <h5>Genre</h5>
                     <div style={scrollable_small}>
                         {genres.map(genre => (
                             <div>
-                                <input class="form-check-input" type="checkbox" value={genre.name} id="flexCheckDefault"/>
+                                <input class="form-check-input" type="checkbox" value={genre.name} onChange={get_value} id="genre"/>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {genre.name}
                                 </label>
@@ -117,13 +111,13 @@ function CatalogSideBar()
                 <li class="nav-item" >
                     <div style={scrollable_small}>
                         <div>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <input class="form-check-input" type="checkbox" value="" id="rating"/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 Highest rating
                             </label>
                         </div>
                         <div>
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                            <input class="form-check-input" type="checkbox" value="" id="most_taken"/>
                             <label class="form-check-label" for="flexCheckDefault">
                                 Most taken
                             </label>
