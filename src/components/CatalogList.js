@@ -112,7 +112,7 @@ var reload_counter = 0;
 var search_enabled = false;
 var book_list = [];
 
-function CatalogList() {
+function CatalogList(props) {
 //pagination 
 /*
     const [books, setBooks] = useState([]);
@@ -133,7 +133,6 @@ function CatalogList() {
 
 
 //sorting
-    const [books, setBooks] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [booksPerPage, setBookstPerPage] = useState(8);
 
@@ -154,7 +153,7 @@ function CatalogList() {
     const getData = async() => {
         console.log("normal word");
         const { data } = await axios.get('http://localhost:8080/api/books');
-        setBooks(data);
+        props.handleSettingBooks(data);
         console.log(data);
     };
 
@@ -173,12 +172,12 @@ function CatalogList() {
     
         if(param.length >= 0) {
             setSearchParam({param});
-            book_list = books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
+            book_list = props.books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
         }
         else {
             setSearchParam({param: ''});
             console.log("Empty search")
-            book_list = books;
+            book_list = props.books;
         }
         console.log("Current book END OF SEARCH")
         console.log(book_list)
@@ -187,10 +186,10 @@ function CatalogList() {
 
     function populate_books(search) {
         if(!search_enabled) {
-            list_size = books.length;
+            list_size = props.books.length;
             if(search.length >= 0) {
                 console.log("current books in POPULATE")
-                currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+                currentBooks = props.books.slice(indexOfFirstBook, indexOfLastBook);
             }
         }
         else{

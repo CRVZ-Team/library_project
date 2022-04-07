@@ -10,6 +10,8 @@ import CatalogList from './CatalogList';
 
 function CatalogFrame() {
 
+    const [books, setBooks] = useState([]);
+
     const side = {
         width: '25%',
     }
@@ -27,10 +29,10 @@ function CatalogFrame() {
     <div className='container'>
         <div class="row" style={body}>
             <div class="col-sm-2" >
-                <CatalogSideBar/>
+                <CatalogSideBar handleSettingBooks={setBooks}/>
             </div>
             <div class="col-sm-10" >
-                <CatalogList/>
+                <CatalogList books={books} handleSettingBooks={setBooks}/>
             </div>
         </div>
     </div>

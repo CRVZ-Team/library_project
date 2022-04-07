@@ -5,13 +5,22 @@ import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
 import Pagination from './general/pagination';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-function CatalogSideBar()
+let updated_authors = [];
+let updated_genres = [];
+let updated_years = [];
+
+function CatalogSideBar(props)
 {
 
     const[authors, setAuthors] = useState([]);
     const[genres, setGenres] = useState([]);
     const[years, setYears] = useState([]);
+
+    const[filter_authors, setFilterAuthors] = useState([]);
+    const[filter_genres, setFilterGenres] = useState([]);
+    const[filter_years, setFilterYears] = useState([]);
 
     const filters ={
         authors: {},
@@ -48,20 +57,50 @@ function CatalogSideBar()
         overflowY: 'auto',
     }
 
-    const get_value = (e) => {
 
-        checked_authors.push(e.target.value);
-        console.log("Checked authors");
-        console.log(checked_authors);
+
+    const get_value = async(e) => {
+
+        if (e.target.id == "author") {
+            if (e.target.checked) {
+                setFilterAuthors([...filter_authors, e.target.value]);
+                updated_authors = [...filter_authors, e.target.value];
+            } else {
+                updated_authors = filter_authors.filter(item => item !== e.target.value);
+                setFilterAuthors(filter_authors.filter(item => item !== e.target.value));
+            }
+        }
+        if (e.target.id == "genre") {
+            if (e.target.checked) {
+                setFilterGenres([...filter_genres, e.target.value]);
+                updated_genres = [...filter_genres, e.target.value];
+            } else {
+                setFilterGenres(filter_genres.filter(item => item !== e.target.value));
+                updated_genres = filter_genres.filter(item => item !== e.target.value);
+            }
+        }
+
+        const { data } = await axios.post("http://localhost:8080/api/filter/books", {
+            authors: updated_authors,
+            genres: updated_genres,
+            years: updated_years
+        });
+
+        props.handleSettingBooks(data);
+
+
+        // checked_authors.push(e.target.value);
+        // console.log("Checked authors");
+        // console.log(checked_authors);
 
         
-        //make it as  a list .. check eact time for entry 
-        //for each filter option 
-        //query each list 
-        filters.authors['name'] = checked_authors[0];
-        console.log("Dict authors");
+        // //make it as  a list .. check eact time for entry 
+        // //for each filter option 
+        // //query each list 
+        // filters.authors['name'] = checked_authors[0];
+        // console.log("Dict authors");
 
-        console.log(filters.authors);
+        // console.log(filters.authors);
     }
     
 
@@ -73,11 +112,13 @@ function CatalogSideBar()
             <ul class="nav nav-pills flex-column mb-auto"> 
                 <h4>Book based</h4>
                 <li class="nav-item" >
-                <h5>Authors</h5>
-                    <div style={scrollable}>
-                        {authors.map(author => ( 
+                <h5>Book attributes</h5>
+                <h7>Authors</h7>
+                    <div style={scrollable_small}>
+                        {authors.map(author => (
                             <div>
-                                <input class="form-check-input" type="checkbox" value={author.name} onChange={get_value} id="author" /><label class="form-check-label" for="flexCheckDefault">
+                                <input class="form-check-input"  type="checkbox" value={author.name} onChange={get_value} id="author"/>
+                                <label class="form-check-label" for="flexCheckDefault">
                                     {author.name}
                                 </label>
                             </div>
