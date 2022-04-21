@@ -20,18 +20,18 @@ function CatalogFrame() {
     }
 
     /*
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={side}>
+    <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={side}>
             <CatalogSideBar/>
         </div>
     */
 
     return(
     <div className='container'>
-        <div class="row" style={body}>
-            <div class="col-sm-2" >
+        <div className="row" style={body}>
+            <div className="col-sm-2" >
                 <CatalogSideBar handleSettingBooks={setBooks}/>
             </div>
-            <div class="col-sm-10" >
+            <div className="col-sm-10" >
                 <CatalogList books={books} handleSettingBooks={setBooks}/>
             </div>
         </div>

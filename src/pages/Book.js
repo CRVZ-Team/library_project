@@ -39,6 +39,14 @@ export const Book = () => {
             book_id: book.id,
             user_id: user.id,
         });
+
+        if (data == "success") {
+            setRating(0);
+            setComment("");
+            alert("Comment added");
+        } else {
+            alert("Error");
+        }
     };
     return (
         <div className="book">

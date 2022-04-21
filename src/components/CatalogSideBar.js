@@ -80,6 +80,16 @@ function CatalogSideBar(props)
             }
         }
 
+        if (e.target.id == "year") {
+            if (e.target.checked) {
+                setFilterYears([...filter_years, e.target.value]);
+                updated_years = [...filter_years, e.target.value];
+            } else {
+                setFilterYears(filter_years.filter(item => item !== e.target.value));
+                updated_years = filter_years.filter(item => item !== e.target.value);
+            }
+        }
+
         const { data } = await axios.post("http://localhost:8080/api/filter/books", {
             authors: updated_authors,
             genres: updated_genres,
@@ -109,16 +119,16 @@ function CatalogSideBar(props)
         <div style={side} id="frame">
             <h2>Filters</h2>
             <hr></hr>
-            <ul class="nav nav-pills flex-column mb-auto"> 
+            <ul className="nav nav-pills flex-column mb-auto"> 
                 <h4>Book based</h4>
-                <li class="nav-item" >
+                <li className="nav-item" >
                 <h5>Book attributes</h5>
-                <h7>Authors</h7>
+                <h6>Authors</h6>
                     <div style={scrollable_small}>
-                        {authors.map(author => (
+                        {authors.map((author, id) => (
                             <div>
-                                <input class="form-check-input"  type="checkbox" value={author.name} onChange={get_value} id="author"/>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input key={id} className="form-check-input"  type="checkbox" value={author.name} onChange={get_value} id="author"/>
+                                <label className="form-check-label" htmlFor="flexCheckDefault">
                                     {author.name}
                                 </label>
                             </div>
@@ -126,9 +136,10 @@ function CatalogSideBar(props)
                     </div>
                     <h5>Year</h5>
                         <div style={scrollable}>
-                            {years.map(year => (
+                            {years.map((year, id) => (
                                 <div>
-                                    <input class="form-check-input" type="checkbox"  onChange={get_value} id="year" /><label class="form-check-label" for="flexCheckDefault">
+                                    <input key={id} className="form-check-input" type="checkbox" value={year} onChange={get_value} id="year" />
+                                    <label className="form-check-label" htmlFor="flexCheckDefault">
                                         {year}
                                     </label>
                                 </div>
@@ -136,10 +147,10 @@ function CatalogSideBar(props)
                         </div>
                     <h5>Genre</h5>
                     <div style={scrollable_small}>
-                        {genres.map(genre => (
+                        {genres.map((genre, id) => (
                             <div>
-                                <input class="form-check-input" type="checkbox" value={genre.name} onChange={get_value} id="genre"/>
-                                <label class="form-check-label" for="flexCheckDefault">
+                                <input key={id} className="form-check-input" type="checkbox" value={genre.name} onChange={get_value} id="genre"/>
+                                <label className="form-check-label" htmlFor="flexCheckDefault">
                                     {genre.name}
                                 </label>
                             </div>
@@ -149,17 +160,17 @@ function CatalogSideBar(props)
                 </li>
                 <br/>
                 <h4>User based</h4>
-                <li class="nav-item" >
+                <li className="nav-item" >
                     <div style={scrollable_small}>
                         <div>
-                            <input class="form-check-input" type="checkbox" value="" id="rating"/>
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input className="form-check-input" type="checkbox" value="" id="rating"/>
+                            <label className="form-check-label" htmlFor="flexCheckDefault">
                                 Highest rating
                             </label>
                         </div>
                         <div>
-                            <input class="form-check-input" type="checkbox" value="" id="most_taken"/>
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input className="form-check-input" type="checkbox" value="" id="most_taken"/>
+                            <label className="form-check-label" htmlFor="flexCheckDefault">
                                 Most taken
                             </label>
                         </div>
