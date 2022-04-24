@@ -24,11 +24,11 @@ function CartFrame() {
 
     return (
         <div>
-            <div class="row">
-                <div class="col-sm-9" >
+            <div className="row">
+                <div className="col-sm-9" >
                     <CartList get_sum={get_sum}/>
                 </div>
-                <div class="col-sm-3" >
+                <div className="col-sm-3" >
                     <CartSum sum={overalSum}/>
                 </div>
             </div>

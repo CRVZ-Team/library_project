@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useToken } from "./useToken";
+import jwt_decode from "jwt-decode";
 
 export const useUser = () => {
     const [token] = useToken();
 
     const getPayloadFromToken = token => {
-        const encodedPayload = token.split('.')[1];
-        return JSON.parse(atob(encodedPayload));
+        const encodedPayload = token.split(".")[1];
+        return jwt_decode(token);
     }
 
     const [user,setUser] = useState(() => {

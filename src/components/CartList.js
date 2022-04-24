@@ -87,17 +87,17 @@ function CartList ({get_sum}) {
 
     return (
         //Main text area
-        <div className="container text-center">
+        <div classNameName="container text-center">
             
             
-            {errorMessage && <div className="fail">{errorMessage}</div> }
+            {errorMessage && <div classNameName="fail">{errorMessage}</div> }
             {books.length <= 0 ? 
                 <>
                     <h1>Your cart is empty</h1>
                     <hr></hr>
                     <h4>Insert books into your cart.</h4>
                     <a href="/catalog">
-                        <button class="btn btn-success" >Look for books</button>
+                        <button className="btn btn-success" >Look for books</button>
                     </a>
                     
                 </>
