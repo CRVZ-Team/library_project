@@ -170,7 +170,7 @@ function CatalogList(props) {
         const param = Event.target.value; 
         //const needs to carry the same name as in .get()   /// otherwise it wont work
     
-        if(param.length >= 0) {
+        if(param != "") {
             setSearchParam({param});
             book_list = props.books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
         }

@@ -11,13 +11,6 @@ function YourBooksFrame() {
 
     const [books, setBooks] = useState([]);
 
-    const side = {
-        width: '25%',
-    }
-
-    const body = {
-    }
-
     /*
     <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={side}>
             <CatalogSideBar/>
@@ -26,8 +19,8 @@ function YourBooksFrame() {
 
     return(
     <div className='container'>
-        <div className="row" style={body}>
-            <div className="col-sm-10" >
+        <div className="row">
+            <div className="col-sm" >
                 <YourBooksList />
             </div>
         </div>

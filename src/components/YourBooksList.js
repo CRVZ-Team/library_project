@@ -16,39 +16,23 @@ var book_list = [];
 var ls;
 
 function YourBooksList(props) {
-//pagination 
-/*
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [booksPerPage, setBookstPerPage] = useState(4);
-
-    const indexOfLastBook = currentPage * booksPerPage;
-    const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    const currentBooks = db_books.slice(indexOfFirstBook, indexOfLastBook);
-    
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    useEffect(() => {   
-        setBooks(currentBooks);
-    }, [currentBooks]);
-    */
-
-
-//sorting
     const [currentPage, setCurrentPage] = useState(1);
     const [booksPerPage, setBookstPerPage] = useState(8);
+    const [searchParam, setSearchParam] = useSearchParams();
+    const [user_id, setUserId] = useState();
 
-    const [sortType, setSortType] = useState('book_id');
-    const [searchType, setSearchType] = useState();
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    var list_size;
-
-    const [user_id, setUserId] = useState();
 
     const [books, setBooks] = useState([]);
+    const [DefaultBookList ,setDefaultBookList] = useState([]);
+
+    var list_size = books.length;
+
+    const searchTerm = searchParam.get('param') || '';  //set the varible name which we are looking for
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
 
 
     useEffect(() => {
@@ -63,98 +47,44 @@ function YourBooksList(props) {
         setUserId(decoded.id);
 
         const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + decoded.id);
-        console.log("data");
+        //setting books list which is used for sorting
         setBooks(data);
-        console.log(data);
+
+        //set default list which to use as default when no search param is provided
+        setDefaultBookList(data);
     };
 
-
-    const [searchParam, setSearchParam] = useSearchParams();
-
-    const searchTerm = searchParam.get('param') || '';  //set the varible name which we are looking for
-
-
-    const paginate = pageNumber => setCurrentPage(pageNumber);
-
-    // const handleSearch = Event => {
-    //     search_enabled = true;
-    //     const param = Event.target.value; 
-    //     //const needs to carry the same name as in .get()   /// otherwise it wont work
-    
-    //     if(param.length >= 0) {
-    //         setSearchParam({param});
-    //         book_list = props.books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
-    //     }
-    //     else {
-    //         setSearchParam({param: ''});
-    //         console.log("Empty search")
-    //         book_list = props.books;
-    //     }
-    //     console.log("Current book END OF SEARCH")
-    //     console.log(book_list)
-    //     console.log(list_size)
-    // };
-
-    // function populate_books(search) {
-    //     if(!search_enabled) {
-    //         list_size = props.books.length;
-    //         if(search.length >= 0) {
-    //             console.log("current books in POPULATE")
-    //             currentBooks = props.books.slice(indexOfFirstBook, indexOfLastBook);
-    //         }
-    //     }
-    //     else{
-    //         list_size = book_list.length;
-    //         console.log("Populate in else")
-    //         currentBooks = book_list.slice(indexOfFirstBook, indexOfLastBook);
-    //         console.log(currentBooks)
-    //     }
-    // };
-
-
-  /*  useEffect(() => {
-        const sortArray = type => {
-        const types = {
-        book_id: 'book_id',
-        year: 'year',
-        author: 'author',
-        title: 'title',
-        };
-        const sortProperty = types[type];
-        if (sortProperty === 'author') {
-            const sorted = [...db_books].sort((a, b) => a.author.localeCompare(b.author));
-            console.log(" Sorted: By author");
-            setBooks(sorted);
-        }
-        else if (sortProperty === 'title') {
+    const handleSearch = Event => {
+        search_enabled = true;
+        const param = Event.target.value; 
+        //const needs to carry the same name as in .get()   /// otherwise it wont work
         
-            const sorted = [...db_books].sort((a, b) => a.title.localeCompare(b.title));
-            console.log(" Sorted: By title");
-            setBooks(sorted);
+        if(param != "") {
+            setSearchParam({param});
+            console.log("Searching for: " + param);
+            //book_list = props.books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
+            book_list = books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
         }
-        else
-        {
-            const sorted = [...db_books].sort((a, b) => b[sortProperty] - a[sortProperty]);
-            console.log(" Sorted: By number");
-            setBooks(sorted);
+        else {
+            setSearchParam({param: ''});
+            console.log("Empty search")
+            book_list = DefaultBookList;
         }
-        
-        };
-        sortArray(sortType);
-    }, [sortType]); 
-    */
+
+        setBooks(book_list);
+        console.log("Current book END OF SEARCH")
+    };
 
     const form = {
         border: 'none',
         borderBottom: '1px solid #556b2f',
-        
     }
 
     return (
         <>
             <div className="container align-items-center">
                 <div className='w-25 p-3 container'>
-                    <input type="text" placeholder="Search for Book/Author"   value={searchTerm} style={form}/>
+                    <input type="text" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm} style={form}/>
                 </div>
                 <Row xs={4} md={8} className="g-4">
                     {books.map(bk => 
