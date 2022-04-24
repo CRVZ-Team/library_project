@@ -31,33 +31,33 @@ export const Book = () => {
         setGenres(data.genres);
         setReviews(data.reviews);
         setSubscriptions(data.subscriptions);
-        verify_activness();
+        //verify_activness();
     };
 
-    const verify_activness = async() => {
-        setActiveIds(usersBooks());
-        console.log("Active IDS");
-        promise  = Promise.resolve(activeIds);
-        promise.then(function(value) {
-            console.log(value);
-            for(var i = 0; i < value.length; i++) {
-                if(value[i] == book.id) {
-                    active = true;
-                }
-            }
-        }),
-        console.log(activeIds);
-        // for (var i = 0; i < activeIds.length; i++) {
-        //     if (activeIds[i] === book.id) {
-        //         active = true;
-        //         console.log("active");
-        //     }
-        //     else {
-        //         active = false;
-        //         console.log("not active");
-        //     }
-        // }
-    };
+    // const verify_activness = async() => {
+    //     setActiveIds(usersBooks());
+    //     console.log("Active IDS");
+    //     promise  = Promise.resolve(activeIds);
+    //     promise.then(function(value) {
+    //         console.log(value);
+    //         for(var i = 0; i < value.length; i++) {
+    //             if(value[i] == book.id) {
+    //                 active = true;
+    //             }
+    //         }
+    //     }),
+    //     console.log(activeIds);
+    //     // for (var i = 0; i < activeIds.length; i++) {
+    //     //     if (activeIds[i] === book.id) {
+    //     //         active = true;
+    //     //         console.log("active");
+    //     //     }
+    //     //     else {
+    //     //         active = false;
+    //     //         console.log("not active");
+    //     //     }
+    //     // }
+    // };
 
 
     const onSubmitClicked = async () => {
