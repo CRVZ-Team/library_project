@@ -6,6 +6,7 @@ import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
 import { usersBooks } from "../pages/usersBooks";
+import jwt_decode from 'jwt-decode';
 
 export const Book = () => {
     const { id } = useParams();
@@ -18,10 +19,11 @@ export const Book = () => {
     const [comment, setComment] = useState("");
     const [activeIds, setActiveIds] = useState([]);
     const user = useUser();
-    const [active] = useState(false);
+    const [active, setActive] = useState(false);
 
     useEffect(() => {
         getData();
+        usersBooks();
     }, []);
 
     const getData = async () => {
@@ -31,33 +33,20 @@ export const Book = () => {
         setGenres(data.genres);
         setReviews(data.reviews);
         setSubscriptions(data.subscriptions);
-        //verify_activness();
     };
 
-    // const verify_activness = async() => {
-    //     setActiveIds(usersBooks());
-    //     console.log("Active IDS");
-    //     promise  = Promise.resolve(activeIds);
-    //     promise.then(function(value) {
-    //         console.log(value);
-    //         for(var i = 0; i < value.length; i++) {
-    //             if(value[i] == book.id) {
-    //                 active = true;
-    //             }
-    //         }
-    //     }),
-    //     console.log(activeIds);
-    //     // for (var i = 0; i < activeIds.length; i++) {
-    //     //     if (activeIds[i] === book.id) {
-    //     //         active = true;
-    //     //         console.log("active");
-    //     //     }
-    //     //     else {
-    //     //         active = false;
-    //     //         console.log("not active");
-    //     //     }
-    //     // }
-    // };
+    const usersBooks = async() => {
+        var ls = localStorage.getItem('token');
+        var decoded = jwt_decode(ls);
+        //itterates through list of subscribes books and changes the submit buttons
+        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + decoded.id);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                console.log("Found");
+                setActive(true);
+            }
+        }
+    };
 
 
     const onSubmitClicked = async () => {

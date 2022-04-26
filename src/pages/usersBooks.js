@@ -13,6 +13,7 @@ export const usersBooks = async() => {
         console.log(data[i].id);
         ids.push(data[i].id);
     }
+    console.log("Function IDS");
     console.log(ids);
     return ids;
 }
