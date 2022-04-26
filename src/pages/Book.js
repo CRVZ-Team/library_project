@@ -5,7 +5,8 @@ import './Book.css';
 import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
-
+import { usersBooks } from "../pages/usersBooks";
+import jwt_decode from 'jwt-decode';
 
 export const Book = () => {
     const { id } = useParams();
@@ -16,10 +17,13 @@ export const Book = () => {
     const [subscriptions, setSubscriptions] = useState([]);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
+    const [activeIds, setActiveIds] = useState([]);
     const user = useUser();
+    const [active, setActive] = useState(false);
 
     useEffect(() => {
         getData();
+        usersBooks();
     }, []);
 
     const getData = async () => {
@@ -30,6 +34,20 @@ export const Book = () => {
         setReviews(data.reviews);
         setSubscriptions(data.subscriptions);
     };
+
+    const usersBooks = async() => {
+        var ls = localStorage.getItem('token');
+        var decoded = jwt_decode(ls);
+        //itterates through list of subscribes books and changes the submit buttons
+        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + decoded.id);
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                console.log("Found");
+                setActive(true);
+            }
+        }
+    };
+
 
     const onSubmitClicked = async () => {
         console.log(user.id);
@@ -70,10 +88,17 @@ export const Book = () => {
                     <p>{book.description} </p>
                 </div>
                 <hr/>
+                
                 <div className="text-center">
-                    <button className="btn btn-outline-success">{subscriptions.month} dkk / month</button>
-                    <button className="btn btn-outline-success">{subscriptions.year} dkk / month</button>
-                    <button className="btn btn-outline-success">{book.price} dkk / month</button>
+                    {active == false ?
+                        <>
+                        <button className="btn btn-outline-success">{subscriptions.month} dkk / month</button>
+                        <button className="btn btn-outline-success">{subscriptions.year} dkk / month</button>
+                        <button className="btn btn-outline-success">{book.price} dkk / month</button>
+                        </>
+                        :
+                        <button className="btn btn-outline-success">You have subscribed to this book.</button>
+                    }
                 </div>
                 <hr/>
                 <ReviewAndComments reviews={reviews} />

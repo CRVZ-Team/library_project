@@ -16,6 +16,7 @@ import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage';
 import CartList from "./components/CartList";
 import CartFrame from './components/CartFrame';
 import { Book } from './pages/Book';
+import YourBooksFrame from './components/YourBooksFrame';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/welcome' element={<WelcomeUser />} />
         <Route path="/book/:id" element={<Book />} />
         <Route path="/catalog" element={<CatalogFrame />} />
+        <Route path="/yourbooks" element={<YourBooksFrame />} />
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />
