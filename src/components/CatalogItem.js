@@ -19,8 +19,8 @@ const CatalogItem = ({book}) => (
                 <Card.Img src={book.image_url}/>
                 {book.exp_date ? <Card.Header>Valid until: {book.exp_date}</Card.Header> : null}
                 <Card.Body>
-                    <Card.Title>{book.title} {book.id}</Card.Title>
-                    <Card.Subtitle>{book.author},  {book.year}</Card.Subtitle>
+                    <Card.Title><b>{book.title}</b></Card.Title>
+                    <Card.Subtitle><b>{book.author},  {book.year}</b></Card.Subtitle>
                     <Card.Text >
                         {book.description.substring(0, 100)}...
                     </Card.Text>

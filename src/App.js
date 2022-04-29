@@ -17,6 +17,7 @@ import CartList from "./components/CartList";
 import CartFrame from './components/CartFrame';
 import { Book } from './pages/Book';
 import YourBooksFrame from './components/YourBooksFrame';
+import { About } from './pages/About';
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         <Route path="/catalog" element={<CatalogFrame />} />
         <Route path="/yourbooks" element={<YourBooksFrame />} />
         <Route path="/events" element={<Home />} />
-        <Route path="/about" element={<Home />} />
+        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Home />} />
         <Route path="/cart" element={<CartFrame />} />
         <Route path="/login" element={<LoginPage />} />
