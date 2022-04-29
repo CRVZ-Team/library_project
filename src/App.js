@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/Home';
-import Catalog from './components/Catalog';
+import CatalogFrame from './components/CatalogFrame';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
 import { PrivateRoute } from './auth/PrivateRoute';
@@ -16,6 +16,7 @@ import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage';
 import CartList from "./components/CartList";
 import CartFrame from './components/CartFrame';
 import { Book } from './pages/Book';
+import YourBooksFrame from './components/YourBooksFrame';
 
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/welcome' element={<WelcomeUser />} />
-        <Route path="/catalog" element={<Catalog />} />
         <Route path="/book/:id" element={<Book />} />
+        <Route path="/catalog" element={<CatalogFrame />} />
+        <Route path="/yourbooks" element={<YourBooksFrame />} />
         <Route path="/events" element={<Home />} />
         <Route path="/about" element={<Home />} />
         <Route path="/contact" element={<Home />} />

@@ -30,7 +30,7 @@ const NavBar = () => {
         <Link style={linkStyle} to="/events">EVENTS</Link>
         <Link style={linkStyle} to="/about">ABOUT US</Link>
         <Link style={linkStyle} to="/contact">CONTACT US</Link>
-        <Link style={linkStyle} to="/your-books">YOUR BOOKS</Link>
+        <Link style={linkStyle} to="/yourbooks">YOUR BOOKS</Link>
         {user == null ? <Link style={linkStyle} to="/login">LOG IN</Link> : <Link onClick={onLogoutClicked} style={linkStyle} to="/">LOG OUT</Link>}
         <a style={linkStyle} href="/cart"><AiOutlineShoppingCart size={45}/></a>
     </nav>

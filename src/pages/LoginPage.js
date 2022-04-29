@@ -12,7 +12,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const onLoginClicked = async () => {
-        const response = await axios.post('https://mrs-whos-library-backend.herokuapp.com/api/login', {
+        const response = await axios.post('http://localhost:8080/api/login', {
             email: emailValue,
             password: passwordValue,
         });

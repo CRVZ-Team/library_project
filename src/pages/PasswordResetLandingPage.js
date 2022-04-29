@@ -13,7 +13,7 @@ export const PasswordResetLandingPage = () => {
 
     const onResetClicked = async() => {
         try {
-            await axios.put(`https://mrs-whos-library-backend.herokuapp.com/api/users/${passwordResetCode}/reset-password`, { newPassword: passwordValue});
+            await axios.put(`http://localhost:8080/api/users/${passwordResetCode}/reset-password`, { newPassword: passwordValue});
             setIsSuccess(true);
         } catch (e) {
             setIsFailure(true);
