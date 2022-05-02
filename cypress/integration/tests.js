@@ -66,31 +66,71 @@ describe("Main tests", function () {  //describes collection of the tests
         }
     });
 
-    // it("Catalog - search form", function () {
-    
 
-    //get by value
-    // cy.get("input[value='Mark Manson']").click();
-    // cy.get("input[value='Mary Shelley']").click();
-    
-    // //verify that book was found
-    // cy.contains("The Subtle Art of Not Giving a F*ck");
-    // cy.contains("Frankenstein");
+    it("Catalog - filters", function () {
+        //get by value
+        cy.contains("LOG OUT");
+        cy.contains("CATALOG").click();
+        cy.url().should("include", "/catalog");
+        
+        //------------------ Athor filter -------------------------
+        cy.get("input[value='Mark Manson']").click();
+        cy.get("input[value='Mary Shelley']").click();
+        //verify that book was found
+        cy.contains("The Subtle Art of Not Giving a F*ck");
+        cy.contains("Frankenstein");
 
+        cy.get("input[value='Mark Manson']").click();
 
-    // cy.get("input[value='Mark Manson']").click();
+        //check that Masons book was removed
+        cy.get(".g-4").get("#7").should("not.exist");
+        cy.get(".g-4").get("#14").should("exist");
 
-    //     //search form test
-    //     cy.get("#search_book")
-    //     .type("Frank")
-    //     .should("have.value", "Frank");
+        cy.get("input[value='Mary Shelley']").click();
+        cy.get(".g-4").get("#14").should("not.exist");
 
-    //     cy.contains("Frankenstein");
+        //------------------ Year filter -------------------------
+        cy.get("input[value='2014']").click();
+        cy.get(".g-4").get("#9").should("exist");
 
-    //     cy.get("#search_book")
-    //     for (let i = 0; i < 5; i++) {
-    //         cy.get("#search_book")
-    //         .type("{backspace}")
-    //     }
-    // });
+        cy.get("input[value='2014']").click();
+        cy.get(".g-4").get("#9").should("not.exist");
+
+        //------------------ Genre filter -------------------------
+        cy.get("input[value='Sci-fi']").click();
+        cy.get("input[value='Drama']").click();
+
+        cy.get(".g-4").get("#11").should("exist");
+        cy.get(".g-4").get("#14").should("exist");
+
+        cy.get("input[value='Drama']").click();
+        cy.get(".g-4").get("#11").should("not.exist");
+        cy.get(".g-4").get("#14").should("exist");
+
+        cy.get("input[value='Sci-fi']").click();
+    });
+
+    it("Catalog - search form", function () {
+
+        cy.contains("LOG OUT");
+        cy.contains("CATALOG").click();
+
+        //search form test
+        cy.get("#search_book")
+        .type("Frank")
+        .should("have.value", "Frank");
+
+        cy.contains("Frankenstein");
+
+        cy.get("#search_book")
+        for (let i = 0; i < 5; i++) {
+            cy.get("#search_book")
+            .type("{backspace}")
+        }
+    });
+
+    it("Log out", function () {
+        cy.contains("LOG OUT").click();
+        cy.url().should("include", "/");
+    }); 
 });
