@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-      
-env: 
-  CI: false
+
 
 jobs:
   cypress-run:
@@ -15,6 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Cypress run
+        env: 
+          CI: false
         uses: cypress-io/github-action@v2
         with:
           build: npm run build
