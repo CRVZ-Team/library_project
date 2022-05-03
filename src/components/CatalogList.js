@@ -244,12 +244,12 @@ function CatalogList(props) {
             {populate_books(searchTerm)}
             <div className="container align-items-center">
                 <div className='w-25 p-3 container'>
-                    <input type="text" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm} style={form}/>
+                    <input id='search_book' type="text" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm} style={form}/>
                 </div>
             
                 <Row xs={4} md={8} className="g-4">
                     {currentBooks.map(bk => 
-                    <Col key={bk.id}>
+                    <Col key={bk.id} id={bk.id}>
                         <CatalogItem book={bk} />
                     </Col>)}
                 </Row>
