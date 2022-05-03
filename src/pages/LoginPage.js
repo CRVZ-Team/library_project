@@ -14,7 +14,7 @@ export const LoginPage = () => {
     const onLoginClicked = async () => {
         const response = await axios.post('http://localhost:8080/api/login', {
             email: emailValue,
-            password: passwordValue,
+            password: passwordValue,            
         });
 
         const { token } = response.data;
@@ -39,16 +39,19 @@ export const LoginPage = () => {
                 <h1>Log In</h1>
                 {errorMessage && <div className="fail">{errorMessage}</div> }
                 <p><input
+                    id="email"
                     value={emailValue}
                     onChange={e => setEmailValue(e.target.value)}
                     placeholder="someone@gmail.com" /></p>
                 <p><input
+                    id="password"
                     type="password"
                     value={passwordValue}
                     onChange={e => setPasswordValue(e.target.value)}
                     placeholder="password" /></p>
                 <hr />
-                <p><button 
+                <p><button
+                    id="login_button"
                     disabled={!emailValue || !passwordValue}
                     onClick={onLoginClicked}>Log In</button></p>
                 <p><button onClick={() => navigate('/forgot-password')}>Forgot your password?</button></p>

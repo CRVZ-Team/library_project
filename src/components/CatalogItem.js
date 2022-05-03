@@ -15,11 +15,11 @@ const exp_date = {
 const CatalogItem = ({book}) => (
     <>
         <a href={`/book/${book.id}`} style={href}>
-            <Card border="dark">
+            <Card border="dark" id="card">
                 <Card.Img src={book.image_url}/>
                 {book.exp_date ? <Card.Header>Valid until: {book.exp_date}</Card.Header> : null}
                 <Card.Body>
-                    <Card.Title>{book.title} {book.id}</Card.Title>
+                    <Card.Title id='title'>{book.title},{book.id}</Card.Title>
                     <Card.Subtitle>{book.author},  {book.year}</Card.Subtitle>
                     <Card.Text >
                         {book.description.substring(0, 100)}...
