@@ -16,7 +16,7 @@ jobs:
           npm ci
 
       - name: Cypress tests
-        run: npm run test:chrome
+        run: npm run build
         continue-on-error: false
         
         
