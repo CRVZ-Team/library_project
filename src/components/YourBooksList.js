@@ -11,13 +11,12 @@ var book_list = [];
 var ls;
 
 function YourBooksList() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [booksPerPage, setBookstPerPage] = useState(8);
+    const [setCurrentPage] = useState(1);
+    const [booksPerPage] = useState(8);
     const [searchParam, setSearchParam] = useSearchParams();
     const [setUserId] = useState();
 
 
-    const indexOfLastBook = currentPage * booksPerPage;
 
     const [books, setBooks] = useState([]);
     const [DefaultBookList ,setDefaultBookList] = useState([]);
@@ -31,7 +30,7 @@ function YourBooksList() {
 
     useEffect(() => {
         getData();
-    }, []);	
+    });	
 
     const getData = async() => {
         console.log("Your Books get data");

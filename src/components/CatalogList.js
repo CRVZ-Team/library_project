@@ -42,7 +42,7 @@ function CatalogList(props) {
 
     useEffect(() => {
         getData();
-    }, []);	
+    });	
 
     const getData = async() => {
         console.log("normal word");

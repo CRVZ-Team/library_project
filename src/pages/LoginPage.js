@@ -57,22 +57,10 @@ export const LoginPage = () => {
                 <p><button onClick={() => navigate('/forgot-password')}>Forgot your password?</button></p>
                 <p><button onClick={() => navigate('/signup')} >Don't have an account? Sign Up</button></p>
             </div>
-            
-            <div className="col mt-5">
-                <h1>Log In with MitID</h1>
-                {errorMessage && <div className="fail">{errorMessage}</div> }
-                <div>
-                    <iframe src="https://mitid.eu.pythonanywhere.com/" style={mitid_style} alt="Image">
-                    </iframe>
-                </div>
-            </div>
             </div>
             
         </div>
     )
-
- 
-
     //"border:2px; height: 20rem; background-color:beige; border-width: 2px; border-color: black;"
 
 }
