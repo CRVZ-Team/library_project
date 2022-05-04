@@ -24,8 +24,10 @@ describe("Main tests", function () {  //describes collection of the tests
     it("Catalog - Click each book", function () {
 
         //check weather user is still loged in
-        cy.contains("LOG OUT");
-        cy.contains("CATALOG").click();
+        setTimeout(() => {
+            cy.contains("LOG OUT");
+            cy.contains("CATALOG").click();
+        }, 2000);
 
         const total_number_of_books = 15
         const pages = Math.ceil(total_number_of_books / 8);
@@ -37,22 +39,24 @@ describe("Main tests", function () {  //describes collection of the tests
             //book loop
             for (let i = starting_book_number; i <= ending_book_number; i++) {
                 //click page each time to get the page for the book
-                cy.get(".w-25").get(".pagination").find("li").eq(p).click();
+                setTimeout(() => {
+                    cy.get(".w-25").get(".pagination").find("li").eq(p).click();
 
-                //get the book
-                cy.get(".g-4").get("#" + i).find(".card-title").then(($div) => {
-                    const book = $div.text().split(",")[0];
+                    //get the book
+                    cy.get(".g-4").get("#" + i).find(".card-title").then(($div) => {
+                        const book = $div.text().split(",")[0];
 
-                    //click the book and verify its correct page and URL 
-                    $div.click();
-                    cy.url().should("include", "/book/" + i);
-                    cy.get(".title-book").should("contain", book);
-                    cy.log("-------- Book active --------");
+                        //click the book and verify its correct page and URL 
+                        $div.click();
+                        cy.url().should("include", "/book/" + i);
+                        cy.get(".title-book").should("contain", book);
+                        cy.log("-------- Book active --------");
 
-                    //return back to main page  -this makes app to go back to page 1-
-                    cy.go("back");
-                }
-                );
+                        //return back to main page  -this makes app to go back to page 1-
+                        cy.go("back");
+                    }
+                    );
+                }, 500);
             }
 
             //set correesponding book numbers for the next page
