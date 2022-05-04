@@ -1,6 +1,8 @@
 describe("Main tests", function () {  //describes collection of the tests
     it("Log in", function () {   //specific test in the collection 
-        cy.visit("localhost:3000/");
+        setTimeout(function () {
+            cy.visit("localhost:3000/");
+        }, 1000);
 
         cy.contains("LOG IN").click();
 
@@ -73,15 +75,14 @@ describe("Main tests", function () {  //describes collection of the tests
 
     it("Catalog - filters", function () {
         //get by value
-        cy.contains("LOG OUT");
-        cy.contains("CATALOG").click();
+        
         cy.url().should("include", "/catalog");
         
         //------------------ Athor filter -------------------------
         cy.get("input[value='Mark Manson']").click();
         cy.get("input[value='Mary Shelley']").click();
         //verify that book was found
-        
+
         cy.get(".g-4").get("#6").should("exist");
         cy.get(".g-4").get("#14").should("exist");
 
