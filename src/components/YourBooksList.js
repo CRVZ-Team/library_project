@@ -49,7 +49,6 @@ function YourBooksList() {
     };
 
     const handleSearch = Event => {
-        search_enabled = true;
         const param = Event.target.value; 
         //const needs to carry the same name as in .get()   /// otherwise it wont work
         
