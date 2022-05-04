@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import CartList from './CartList';
 
 function MouseOver(event) {
     event.target.style.background = '#dc3545';
@@ -14,7 +13,7 @@ const CartItem = ({book, removeBook}) => (
     <div className="container" style={card}>
         <div className="row">
             <div className="col-sm-3 d-flex justify-content-center text-center" >
-                <img src={book.photo} style={photo}/>
+                <img src={book.photo} style={photo} alt="Book image"/>
             </div>
             <div className="col-sm-9" style={text}>
                 <div className="row">

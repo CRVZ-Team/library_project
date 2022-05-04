@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useToken } from "../auth/useToken";
-import axios from 'axios';
 import CartItem from "./CartItem";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -63,13 +60,10 @@ const boks_db = [
 
 
 function CartList ({get_sum}) {
-    const [token, setToken] = useToken();
-    const [errorMessage, setErrorMessage] = useState('');
-    const [retrieveList, setList] = useState('');
+    const [errorMessage] = useState('');
 
     //set books list 
     const [books, setBooks] = useState(boks_db);
-    const navigate = useNavigate();
 
     function removeBook(id) {
         const newList = books.filter(book => book.id !== id);

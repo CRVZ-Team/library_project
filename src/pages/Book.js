@@ -5,19 +5,17 @@ import './Book.css';
 import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
-import { usersBooks } from "../pages/usersBooks";
 import jwt_decode from 'jwt-decode';
 
 export const Book = () => {
     const { id } = useParams();
-    const [data, setData] = useState({});
+    const [setData] = useState({});
     const [book, setBook] = useState({});
     const [genres, setGenres] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [subscriptions, setSubscriptions] = useState([]);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
-    const [activeIds, setActiveIds] = useState([]);
     const user = useUser();
     const [active, setActive] = useState(false);
 

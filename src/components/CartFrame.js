@@ -1,8 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useToken } from "../auth/useToken";
-import axios from 'axios';
-import CartItem from "./CartItem";
 import CartList from "./CartList";
 import CartSum from "./CartSum";
 import "bootstrap/dist/css/bootstrap.css";

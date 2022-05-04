@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { BsFillStarFill } from "react-icons/bs";
+import { useState } from "react";
 
 export const StarRating = props => {
     const [hover, setHover] = useState(0);

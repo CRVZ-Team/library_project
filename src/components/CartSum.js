@@ -1,15 +1,9 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useToken } from "../auth/useToken";
-import axios from 'axios';
-import CartItem from "./CartItem";
-import CartList from "./CartList";
 import "bootstrap/dist/css/bootstrap.css";
 
 const CartFrame = ({sum}) => (
     <div className="container" style={card}>
         
-        {sum == 0 ? 
+        {sum === 0 ? 
             <>
                 
             </>

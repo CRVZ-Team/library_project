@@ -5,8 +5,8 @@ import { useToken } from "../auth/useToken";
 import "bootstrap/dist/css/bootstrap.css";
 
 export const LoginPage = () => {
-    const [token, setToken] = useToken();
-    const [errorMessage, setErrorMessage] = useState('');
+    const [setToken] = useToken();
+    const [errorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
     const navigate = useNavigate();
@@ -62,7 +62,7 @@ export const LoginPage = () => {
                 <h1>Log In with MitID</h1>
                 {errorMessage && <div className="fail">{errorMessage}</div> }
                 <div>
-                    <iframe src="https://mitid.eu.pythonanywhere.com/" style={mitid_style}>
+                    <iframe src="https://mitid.eu.pythonanywhere.com/" style={mitid_style} alt="Image">
                     </iframe>
                 </div>
             </div>
