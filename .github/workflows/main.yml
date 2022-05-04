@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-      
-env: 
-  CI: false
+
 
 jobs:
   cypress-run:
