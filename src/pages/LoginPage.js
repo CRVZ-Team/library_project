@@ -5,7 +5,7 @@ import { useToken } from "../auth/useToken";
 import "bootstrap/dist/css/bootstrap.css";
 
 export const LoginPage = () => {
-    const [setToken] = useToken();
+    const [token, setToken] = useToken();
     const [errorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
@@ -22,15 +22,6 @@ export const LoginPage = () => {
         navigate("/");
         window.location.reload(false);
     } 
-
-    const mitid_style = {
-        border: '2px solid #ccc',
-        borderRadius: '4px',
-        padding: '10px',
-        margin: '10px',
-        width: '25rem',
-        height: '25rem',
-    }
 
     return (
         <div className="container text-center">
