@@ -81,8 +81,9 @@ describe("Main tests", function () {  //describes collection of the tests
         cy.get("input[value='Mark Manson']").click();
         cy.get("input[value='Mary Shelley']").click();
         //verify that book was found
-        cy.contains("The Subtle Art of Not Giving a F*ck");
-        cy.contains("Frankenstein");
+        
+        cy.get(".g-4").get("#6").should("exist");
+        cy.get(".g-4").get("#14").should("exist");
 
         cy.get("input[value='Mark Manson']").click();
 
