@@ -6,7 +6,7 @@ import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
 import { useToken } from "../auth/useToken";
-
+import { useNavigate } from "react-router-dom";
 
 export const Book = () => {
     const { id } = useParams();
@@ -20,10 +20,13 @@ export const Book = () => {
     const [active, setActive] = useState(false);
     const [activeIds, setActiveIds] = useState([]);
     const user = useUser();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getData();
-        usersBooks();
+        if (user != null) {
+            usersBooks();
+        }
     }, []);
 
     const handleAddToCart = (subscription) => {
@@ -116,21 +119,29 @@ export const Book = () => {
                 </div>
                 <hr/>
                 <div className="text-center">
-                {active == false ?
-                        <>
-                        <button className="btn btn-outline-success">{subscriptions.month} dkk / month</button>
-                        <button className="btn btn-outline-success">{subscriptions.year} dkk / month</button>
-                        <button className="btn btn-outline-success">{book.price} dkk / month</button>
-                        </>
-                        :
+                {(() => {if (active == false && user != null) {
+                    return(
+                    <>
+                        <button className="btn btn-outline-success" onClick={() => {handleAddToCart("month")}}>{subscriptions.month} dkk / month</button>
+                        <button className="btn btn-outline-success" onClick={() => {handleAddToCart("year")}}>{subscriptions.year} dkk / year</button>
+                        <button className="btn btn-outline-success"onClick={() => {handleAddToCart("")}}>{book.price} dkk / unlimited</button>
+                    </>)
+                } else if (active == true && user != null) {
+                    return (
                         <button className="btn btn-outline-success">You have subscribed to this book.</button>
-                    }
+                    )
+                } else {
+                    return (
+                        <button className="btn btn-outline-success" onClick={() => {navigate('/login')}}>Login to subscribe</button>
+                        )}
+                    })
+                ()}
                 </div>
                 <hr/>
                 <ReviewAndComments reviews={reviews} />
                 <hr/>
                 {/* leave a comment */}
-                <LeaveAReview rating={rating} comment={comment} handleRating={setRating} handleComment={setComment} onSubmitClicked={onSubmitClicked}/>
+                {user != null ? <LeaveAReview rating={rating} comment={comment} handleRating={setRating} handleComment={setComment} onSubmitClicked={onSubmitClicked}/> : null }
             </div>
         </div>
         

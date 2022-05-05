@@ -15,7 +15,7 @@ const exp_date = {
 const CatalogItem = ({book}) => (
     <>
         <a href={`/book/${book.id}`} style={href}>
-            <Card border="dark">
+            <Card border="dark" className='h-100'>
                 <Card.Img src={book.image_url}/>
                 {book.exp_date ? <Card.Header>Valid until: {book.exp_date}</Card.Header> : null}
                 <Card.Body>

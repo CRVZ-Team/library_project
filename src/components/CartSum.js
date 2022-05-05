@@ -22,6 +22,7 @@ const CartFrame = ({sum, setOveralSum, setBooks}) => {
                 }; 
             const response = await axios.post('http://localhost:8080/api/invoice',{
                 user_id: user.id,
+                user_email: user.email,
                 date: Date(),
                 total_price: sum,
                 books: books
@@ -38,19 +39,12 @@ const CartFrame = ({sum, setOveralSum, setBooks}) => {
 
     return (
     <div className="container" style={card}>
-        
-        {sum == 0 ? 
-            <>
-                
-            </>
-        :
             <>
                 <h4>Check out your cart </h4>
                 <h3><b>Total:</b> {sum} dkk</h3>
-                <button className="btn btn-success" onClick={() => {handleCheckOut()}}>Checkout</button>
+                <button className="btn btn-success" onClick={() => {handleCheckOut()}} disabled={sum === 0} >Checkout</button>
                 <hr></hr>
             </>
-        }
     </div>
     )
 }

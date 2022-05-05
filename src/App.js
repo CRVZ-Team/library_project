@@ -18,6 +18,7 @@ import CartFrame from './components/CartFrame';
 import { Book } from './pages/Book';
 import YourBooksFrame from './components/YourBooksFrame';
 import { About } from './pages/About';
+import { Footer } from './components/Footer';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path='/forgot-password' element={<ForgotPasswordPage />} />
       </Routes>
+      {/* <Footer /> */}
     </Router>
   );
 }
