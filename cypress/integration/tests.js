@@ -40,7 +40,7 @@ describe("Main tests", function () {  //describes collection of the tests
                 cy.get(".w-25").get(".pagination").find("li").eq(p).click();
 
                 //get the book
-                cy.get(".g-4").get("#" + i).find(".card-title").then(($div) => {
+                cy.get(".g-2").get("#" + i).find(".card-title").then(($div) => {
                     const book = $div.text().split(",")[0];
 
                     //click the book and verify its correct page and URL 
@@ -83,29 +83,29 @@ describe("Main tests", function () {  //describes collection of the tests
         cy.get("input[value='Mark Manson']").click();
 
         //check that Masons book was removed
-        cy.get(".g-4").get("#7").should("not.exist");
-        cy.get(".g-4").get("#14").should("exist");
+        cy.get(".g-2").get("#7").should("not.exist");
+        cy.get(".g-2").get("#14").should("exist");
 
         cy.get("input[value='Mary Shelley']").click();
-        cy.get(".g-4").get("#14").should("not.exist");
+        cy.get(".g-2").get("#14").should("not.exist");
 
         //------------------ Year filter -------------------------
         cy.get("input[value='2014']").click();
-        cy.get(".g-4").get("#9").should("exist");
+        cy.get(".g-2").get("#9").should("exist");
 
         cy.get("input[value='2014']").click();
-        cy.get(".g-4").get("#9").should("not.exist");
+        cy.get(".g-2").get("#9").should("not.exist");
 
         //------------------ Genre filter -------------------------
         cy.get("input[value='Sci-fi']").click();
         cy.get("input[value='Drama']").click();
 
-        cy.get(".g-4").get("#11").should("exist");
-        cy.get(".g-4").get("#14").should("exist");
+        cy.get(".g-2").get("#11").should("exist");
+        cy.get(".g-2").get("#14").should("exist");
 
         cy.get("input[value='Drama']").click();
-        cy.get(".g-4").get("#11").should("not.exist");
-        cy.get(".g-4").get("#14").should("exist");
+        cy.get(".g-2").get("#11").should("not.exist");
+        cy.get(".g-2").get("#14").should("exist");
 
         cy.get("input[value='Sci-fi']").click();
     });
