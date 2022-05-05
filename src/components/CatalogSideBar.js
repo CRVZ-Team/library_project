@@ -116,7 +116,7 @@ function CatalogSideBar(props)
 
     return(
     <>
-        <div style={side} id="frame">
+        <div style={side} id="frame" className='frame'>
             <h2>Filters</h2>
             <hr></hr>
             <ul className="nav nav-pills flex-column mb-auto"> 

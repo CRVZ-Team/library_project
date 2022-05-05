@@ -5,8 +5,8 @@ import './Book.css';
 import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
-import { usersBooks } from "../pages/usersBooks";
-import jwt_decode from 'jwt-decode';
+import { useToken } from "../auth/useToken";
+import { useNavigate } from "react-router-dom";
 
 export const Book = () => {
     const { id } = useParams();
@@ -17,14 +17,47 @@ export const Book = () => {
     const [subscriptions, setSubscriptions] = useState([]);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
+    const [active, setActive] = useState(false);
     const [activeIds, setActiveIds] = useState([]);
     const user = useUser();
-    const [active, setActive] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         getData();
-        usersBooks();
+        if (user != null) {
+            usersBooks();
+        }
     }, []);
+
+    const handleAddToCart = (subscription) => {
+        const cartBook = book;
+        let cart = [];
+        if (subscription == "month") {
+            cartBook.subs_id = 1;
+            cartBook.exp_date = 30;
+            cartBook.price = subscriptions.month;
+        }
+        else if (subscription == "year") {
+            cartBook.subs_id = 2;
+            cartBook.exp_date = 365;
+            cartBook.price = subscriptions.year;
+        } else cartBook.subs_id = 3;
+
+        if (localStorage.getItem("cart") != null) 
+        {
+            cart = JSON.parse(localStorage.getItem("cart"));
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id === cartBook.id) {
+                    console.log("Book already in cart");
+                    cart.splice(i, 1);
+                    break;
+                }
+            }
+        }
+        cart.push(cartBook);
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    };
 
     const getData = async () => {
         const { data } = await axios.get(`http://localhost:8080/api/book/${id}`);
@@ -36,10 +69,8 @@ export const Book = () => {
     };
 
     const usersBooks = async() => {
-        var ls = localStorage.getItem('token');
-        var decoded = jwt_decode(ls);
         //itterates through list of subscribes books and changes the submit buttons
-        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + decoded.id);
+        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + user.id);
         for (var i = 0; i < data.length; i++) {
             if (data[i].id == id) {
                 console.log("Found");
@@ -47,7 +78,6 @@ export const Book = () => {
             }
         }
     };
-
 
     const onSubmitClicked = async () => {
         console.log(user.id);
@@ -88,23 +118,30 @@ export const Book = () => {
                     <p>{book.description} </p>
                 </div>
                 <hr/>
-                
                 <div className="text-center">
-                    {active == false ?
-                        <>
-                        <button className="btn btn-outline-success">{subscriptions.month} dkk / month</button>
-                        <button className="btn btn-outline-success">{subscriptions.year} dkk / month</button>
-                        <button className="btn btn-outline-success">{book.price} dkk / month</button>
-                        </>
-                        :
+                {(() => {if (active == false && user != null) {
+                    return(
+                    <>
+                        <button className="btn btn-outline-success" onClick={() => {handleAddToCart("month")}}>{subscriptions.month} dkk / month</button>
+                        <button className="btn btn-outline-success" onClick={() => {handleAddToCart("year")}}>{subscriptions.year} dkk / year</button>
+                        <button className="btn btn-outline-success"onClick={() => {handleAddToCart("")}}>{book.price} dkk / unlimited</button>
+                    </>)
+                } else if (active == true && user != null) {
+                    return (
                         <button className="btn btn-outline-success">You have subscribed to this book.</button>
-                    }
+                    )
+                } else {
+                    return (
+                        <button className="btn btn-outline-success" onClick={() => {navigate('/login')}}>Login to subscribe</button>
+                        )}
+                    })
+                ()}
                 </div>
                 <hr/>
                 <ReviewAndComments reviews={reviews} />
                 <hr/>
                 {/* leave a comment */}
-                <LeaveAReview rating={rating} comment={comment} handleRating={setRating} handleComment={setComment} onSubmitClicked={onSubmitClicked}/>
+                {user != null ? <LeaveAReview rating={rating} comment={comment} handleRating={setRating} handleComment={setComment} onSubmitClicked={onSubmitClicked}/> : null }
             </div>
         </div>
         
