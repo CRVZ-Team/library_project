@@ -7,11 +7,6 @@ const href = {
     color: 'black'
 }
 
-const exp_date = {
-    fontSize: '20px',
-    color: '#8c8c8c'
-}
-
 const CatalogItem = ({book}) => (
     <>
         <a href={`/book/${book.id}`} style={href}>

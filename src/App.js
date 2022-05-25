@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import NavBar from "./components/NavBar";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
@@ -7,13 +6,11 @@ import Home from './pages/Home';
 import CatalogFrame from './components/CatalogFrame';
 import { LoginPage } from './pages/LoginPage';
 import { SignUpPage } from './pages/SignUpPage';
-import { PrivateRoute } from './auth/PrivateRoute';
 import { WelcomeUser } from './pages/WelcomeUser';
 import { PleaseVerifyEmailPage} from './pages/PleaseVerifyEmailPage';
 import { EmailVerificationLandingPage} from './pages/EmailVerificationLandingPage';
 import { ForgotPasswordPage } from './pages/ForgotPasswordPage';
 import { PasswordResetLandingPage } from './pages/PasswordResetLandingPage'; 
-import CartList from "./components/CartList";
 import CartFrame from './components/CartFrame';
 import { Book } from './pages/Book';
 import YourBooksFrame from './components/YourBooksFrame';

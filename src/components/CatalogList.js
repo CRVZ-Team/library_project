@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
 import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Col } from 'react-bootstrap';
@@ -7,9 +6,7 @@ import Pagination from './general/pagination';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 
-
 var currentBooks;
-var reload_counter = 0;
 var search_enabled = false;
 var book_list = [];
 
@@ -35,11 +32,7 @@ function CatalogList(props) {
 
 //sorting
     const [currentPage, setCurrentPage] = useState(1);
-    const [booksPerPage, setBookstPerPage] = useState(8);
-
-    const [sortType, setSortType] = useState('book_id');
-    const [searchType, setSearchType] = useState();
-
+    const [booksPerPage] = useState(8);
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;
@@ -49,7 +42,7 @@ function CatalogList(props) {
 
     useEffect(() => {
         getData();
-    }, []);	
+    });	
 
     const getData = async() => {
         console.log("normal word");
@@ -77,7 +70,7 @@ function CatalogList(props) {
         const param = Event.target.value; 
         //const needs to carry the same name as in .get()   /// otherwise it wont work
     
-        if(param != "") {
+        if(param !== "") {
             setSearchParam({param});
             book_list = props.books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
         }

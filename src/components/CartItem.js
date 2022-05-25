@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import CartList from './CartList';
 
 function MouseOver(event) {
     event.target.style.background = '#dc3545';

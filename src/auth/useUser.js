@@ -6,7 +6,6 @@ export const useUser = () => {
     const [token] = useToken();
 
     const getPayloadFromToken = token => {
-        const encodedPayload = token.split(".")[1];
         return jwt_decode(token);
     }
 

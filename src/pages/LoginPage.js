@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 export const LoginPage = () => {
     const [token, setToken] = useToken();
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
     const navigate = useNavigate();
@@ -22,15 +22,6 @@ export const LoginPage = () => {
         navigate("/");
         window.location.reload(false);
     } 
-
-    const mitid_style = {
-        border: '2px solid #ccc',
-        borderRadius: '4px',
-        padding: '10px',
-        margin: '10px',
-        width: '25rem',
-        height: '25rem',
-    }
 
     return (
         <div className="container text-center">
@@ -61,9 +52,6 @@ export const LoginPage = () => {
             
         </div>
     )
-
- 
-
     //"border:2px; height: 20rem; background-color:beige; border-width: 2px; border-color: black;"
 
 }

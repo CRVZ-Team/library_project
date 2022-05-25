@@ -72,7 +72,7 @@ export const Book = () => {
         //itterates through list of subscribes books and changes the submit buttons
         const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + user.id);
         for (var i = 0; i < data.length; i++) {
-            if (data[i].id == id) {
+            if (data[i].id === id) {
                 console.log("Found");
                 setActive(true);
             }
@@ -88,7 +88,7 @@ export const Book = () => {
             user_id: user.id,
         });
 
-        if (data == "success") {
+        if (data === "success") {
             setRating(0);
             setComment("");
             alert("Comment added");
@@ -99,7 +99,7 @@ export const Book = () => {
     return (
         <div className="book">
             <div className="first">
-            <img className="img-book" src={book.image_url}></img>
+            <img className="img-book" src={book.image_url} alt="Book"></img>
             <hr/>
             <div className="spec-book">
                     <h3><b>Specifications</b></h3>

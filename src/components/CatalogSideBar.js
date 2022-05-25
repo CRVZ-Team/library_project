@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import ReactPaginate from 'react-paginate';
-import CatalogItem from './CatalogItem';
 import "bootstrap/dist/css/bootstrap.css";
-import { Row, Col } from 'react-bootstrap';
-import Pagination from './general/pagination';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 let updated_authors = [];
 let updated_genres = [];
@@ -21,14 +16,6 @@ function CatalogSideBar(props)
     const[filter_authors, setFilterAuthors] = useState([]);
     const[filter_genres, setFilterGenres] = useState([]);
     const[filter_years, setFilterYears] = useState([]);
-
-    const filters ={
-        authors: {},
-        genres: {},
-        years: []
-    }
-
-    const checked_authors = [];
 
     useEffect(() => {
         getAuthors();
@@ -61,7 +48,7 @@ function CatalogSideBar(props)
 
     const get_value = async(e) => {
 
-        if (e.target.id == "author") {
+        if (e.target.id === "author") {
             if (e.target.checked) {
                 setFilterAuthors([...filter_authors, e.target.value]);
                 updated_authors = [...filter_authors, e.target.value];
@@ -70,7 +57,7 @@ function CatalogSideBar(props)
                 setFilterAuthors(filter_authors.filter(item => item !== e.target.value));
             }
         }
-        if (e.target.id == "genre") {
+        if (e.target.id === "genre") {
             if (e.target.checked) {
                 setFilterGenres([...filter_genres, e.target.value]);
                 updated_genres = [...filter_genres, e.target.value];
@@ -80,7 +67,7 @@ function CatalogSideBar(props)
             }
         }
 
-        if (e.target.id == "year") {
+        if (e.target.id === "year") {
             if (e.target.checked) {
                 setFilterYears([...filter_years, e.target.value]);
                 updated_years = [...filter_years, e.target.value];
