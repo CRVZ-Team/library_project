@@ -51,6 +51,12 @@ function CatalogList(props) {
         console.log(data);
     };
 
+    useEffect(() => {
+        currentBooks = props.books;
+        list_size = currentBooks.length;
+        console.log("useEffect")
+    }, [props.books]);
+
 
     const [searchParam, setSearchParam] = useSearchParams();
 
@@ -141,7 +147,7 @@ function CatalogList(props) {
                     <input id='search_book' type="text" placeholder="Search for Book/Author" onChange={handleSearch}  value={searchTerm} style={form}/>
                 </div>
             
-                <Row xs={4} md={8} className="g-4">
+                <Row s={2} md={4} className="g-2">
                     {currentBooks.map(bk => 
                     <Col key={bk.id} id={bk.id}>
                         <CatalogItem book={bk} />

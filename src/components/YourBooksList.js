@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import Pagination from './general/pagination';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import jwt_decode from 'jwt-decode';
+import { useUser } from '../auth/useUser';
 
 var book_list = [];
 var ls;
@@ -14,7 +14,7 @@ function YourBooksList() {
     const [setCurrentPage] = useState(1);
     const [booksPerPage] = useState(8);
     const [searchParam, setSearchParam] = useSearchParams();
-    const [setUserId] = useState();
+    const user = useUser();
 
 
 
@@ -34,12 +34,7 @@ function YourBooksList() {
 
     const getData = async() => {
         console.log("Your Books get data");
-                //decode jwt
-        ls = localStorage.getItem('token');
-        var decoded = jwt_decode(ls);
-        setUserId(decoded.id);
-
-        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + decoded.id);
+        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + user.id);
         //setting books list which is used for sorting
         setBooks(data);
 

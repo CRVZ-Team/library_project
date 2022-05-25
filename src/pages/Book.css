@@ -19,6 +19,7 @@
 
   .title-book {
     font-size: 36px;
+    font-weight: bold;
     line-height: 40px;
     align-items: center;
   }
