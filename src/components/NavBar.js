@@ -1,8 +1,8 @@
 import { GiOwl } from "react-icons/gi";
-import { FaQuestion } from "react-icons/fa";
-import { BsBookmarkHeartFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 import './NavBar.css';
+import { useUser } from "../auth/useUser";
 
 const linkStyle = {
     textDecoration: 'none',
@@ -10,18 +10,40 @@ const linkStyle = {
     fontSize: '18px',
     fontWeight: 'bold'
 }
+const linkStyleCart = {
+    textDecoration: 'none',
+    marginRight: '15px',
+    color: '#ffffff',
+    fontSize: '18px',
+    fontWeight: 'bold'
+}
 
-const NavBar = () => (
+const NavBar = () => {
+    const user = useUser();
+    const navigate = useNavigate();
+
+    const onLogoutClicked = () => {
+        localStorage.removeItem("token");
+        navigate("/");
+        window.location.reload(false);
+    }
+
+    console.log(user);
+    return(
     <nav className="navbar menu">
-        <h3 className="logo"><GiOwl size={70}/>Mrs. Who`s Library</h3>
-        <Link style={linkStyle} to="/">Home</Link>
-        <Link style={linkStyle} to="/catalog">Catalog</Link>
-        <Link style={linkStyle} to="/events">Events</Link>
-        <Link style={linkStyle} to="/about">About Us</Link>
-        <Link style={linkStyle} to="/contact">Contact Us</Link>
-        <Link style={linkStyle} to="/login">Login</Link>
-        <a style={linkStyle} href="/"><BsBookmarkHeartFill size={45}/>Cart</a>
+        <h3 className="logo"><GiOwl size={65}/>Mrs. Who`s Library</h3>
+        <Link style={linkStyle} to="/">HOME</Link>
+        <Link style={linkStyle} to="/catalog">CATALOG</Link>
+        <Link style={linkStyle} to="/events">EVENTS</Link>
+        <Link style={linkStyle} to="/about">ABOUT US</Link>
+        <Link style={linkStyle} to="/contact">CONTACT US</Link>
+        {user != null ? <Link style={linkStyle} to="/yourbooks">YOUR BOOKS</Link>:null}
+        {user == null ? <Link style={linkStyle} to="/login">LOG IN</Link> : <Link onClick={onLogoutClicked} style={linkStyle} to="/">LOG OUT</Link>}
+        <a style={linkStyleCart} href="/cart"><AiOutlineShoppingCart size={45}/></a>
     </nav>
-);
+)};
 
+
+
+//vercel
 export default NavBar;
