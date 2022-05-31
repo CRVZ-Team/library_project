@@ -18,7 +18,7 @@ const CartFrame = ({sum, setOveralSum, setBooks}) => {
             for (let i = 0; i < cartBooks.length; i++) {
                 books.push({'id': cartBooks[i].id, 'subs_id': cartBooks[i].subs_id, 'exp_date': cartBooks[i].exp_date});
                 }; 
-            const response = await axios.post(`${process.env.BACKEND}/api/invoice`,{
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/invoice`,{
                 user_id: user.id,
                 user_email: user.email,
                 date: Date(),

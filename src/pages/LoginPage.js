@@ -12,7 +12,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const onLoginClicked = async () => {
-        const response = await axios.post(`${process.env.BACKEND}/api/login`, {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/login`, {
             email: emailValue,
             password: passwordValue,            
         });
