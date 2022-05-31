@@ -27,7 +27,7 @@ function CatalogList(props) {
     }, []);	
 
     const getData = async() => {
-        const { data } = await axios.get(`${process.env.BACKEND}/api/books`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/books`);
         props.handleSettingBooks(data);
     };
 

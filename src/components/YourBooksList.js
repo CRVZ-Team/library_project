@@ -34,7 +34,7 @@ function YourBooksList() {
     }, []);	
 
     const getData = async() => {
-        const { data } = await axios.get(`${process.env.BACKEND}/api/yourbooks/${user.id}`, {headers:{'Authorization': `Bearer ${token}`}});
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/yourbooks/${user.id}`, {headers:{'Authorization': `Bearer ${token}`}});
         //setting books list which is used for sorting
         setBooks(data);
 

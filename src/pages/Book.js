@@ -56,7 +56,7 @@ export const Book = () => {
     };
 
     const getData = async () => {
-        const { data } = await axios.get(`${process.env.BACKEND}/api/book/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/book/${id}`);
         setBook(data.book);
         setGenres(data.genres);
         setReviews(data.reviews);
@@ -65,7 +65,7 @@ export const Book = () => {
 
     const usersBooks = async() => {
         //itterates through list of subscribes books and changes the submit buttons
-        const { data } = await axios.get(`${process.env.BACKEND}/api/yourbooks/${user.id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/yourbooks/${user.id}`);
         for (var i = 0; i < data.length; i++) {
             if (data[i].id === id) {
                 setActive(true);
@@ -74,7 +74,7 @@ export const Book = () => {
     };
 
     const onSubmitClicked = async () => {
-        const { data } = await axios.post(`${process.env.BACKEND}/api/comment`, {
+        const { data } = await axios.post(`${process.env.REACT_APP_BACKEND}/api/comment`, {
             rating,
             comment,
             book_id: book.id,
