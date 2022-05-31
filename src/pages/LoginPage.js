@@ -12,7 +12,7 @@ export const LoginPage = () => {
     const navigate = useNavigate();
 
     const onLoginClicked = async () => {
-        const response = await axios.post('http://localhost:8080/api/login', {
+        const response = await axios.post(`${process.env.BACKEND}/api/login`, {
             email: emailValue,
             password: passwordValue,            
         });
@@ -52,6 +52,4 @@ export const LoginPage = () => {
             
         </div>
     )
-    //"border:2px; height: 20rem; background-color:beige; border-width: 2px; border-color: black;"
-
 }

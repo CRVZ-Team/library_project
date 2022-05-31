@@ -10,7 +10,7 @@ export const ForgotPasswordPage = () => {
 
     const onSubmitClicked = async() => {
         try {
-            await axios.put(`http://localhost:8080/api/forgot-password/${emailValue}`);
+            await axios.put(`${process.env.BACKEND}/api/forgot-password/${emailValue}`);
             setSuccess(true);
             setTimeout(() => {
                 navigate('/login');

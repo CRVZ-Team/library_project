@@ -84,20 +84,6 @@ function CatalogSideBar(props)
         });
 
         props.handleSettingBooks(data);
-
-
-        // checked_authors.push(e.target.value);
-        // console.log("Checked authors");
-        // console.log(checked_authors);
-
-        
-        // //make it as  a list .. check eact time for entry 
-        // //for each filter option 
-        // //query each list 
-        // filters.authors['name'] = checked_authors[0];
-        // console.log("Dict authors");
-
-        // console.log(filters.authors);
     }
     
 
@@ -106,9 +92,9 @@ function CatalogSideBar(props)
         <div style={side} id="frame" className='frame'>
             <h2>Filters</h2>
             <hr></hr>
+            <h4>Book based</h4>
             <ul className="nav nav-pills flex-column mb-auto"> 
-                <h4>Book based</h4>
-                <li className="nav-item" >
+                <li key={"1"} className="nav-item" >
                 <h5>Book attributes</h5>
                 <h6>Authors</h6>
                     <div style={scrollable_small}>
@@ -147,7 +133,7 @@ function CatalogSideBar(props)
                 </li>
                 <br/>
                 <h4>User based</h4>
-                <li className="nav-item" >
+                <li key={"2"} className="nav-item">
                     <div style={scrollable_small}>
                         <div>
                             <input className="form-check-input" type="checkbox" value="" id="rating"/>
@@ -163,7 +149,6 @@ function CatalogSideBar(props)
                         </div>
                     </div>
                 </li>
-                
             </ul>
             <hr></hr>
         </div>

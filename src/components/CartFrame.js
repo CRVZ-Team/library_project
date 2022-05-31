@@ -10,9 +10,8 @@ function CartFrame() {
     const [overalSum, setOveralSum] = useState('0');
 
     function get_sum(sum) {
-        if (sum == null) {
+        if (sum === null) {
             setOveralSum(0);
-            console.log("sum is null");
         } else {
             setOveralSum(sum);
         }

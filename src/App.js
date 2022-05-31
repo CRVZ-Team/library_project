@@ -16,6 +16,8 @@ import { Book } from './pages/Book';
 import YourBooksFrame from './components/YourBooksFrame';
 import { About } from './pages/About';
 import { Footer } from './components/Footer';
+import { PrivateRoute } from './auth/PrivateRoute';
+import { NotFound } from './pages/NotFound';
 
 
 function App() {
@@ -24,21 +26,22 @@ function App() {
       <NavBar />
       <br/>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path='/welcome' element={<WelcomeUser />} />
-        <Route path="/book/:id" element={<Book />} />
-        <Route path="/catalog" element={<CatalogFrame />} />
-        <Route path="/yourbooks" element={<YourBooksFrame />} />
-        <Route path="/events" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Home />} />
-        <Route path="/cart" element={<CartFrame />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path='/reset-password/:passwordResetCode' element={<PasswordResetLandingPage />} />
-        <Route path='/verify-email/:verificationString' element={<EmailVerificationLandingPage />} />
-        <Route path='/please-verify' element={<PleaseVerifyEmailPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+        <Route exact path="/" element={<Home />} />
+        <Route exact path='/welcome' element={<WelcomeUser />} />
+        <Route exact path="/book/:id" element={<Book />} />
+        <Route exact path="/catalog" element={<CatalogFrame />} />
+        <Route exact path="/yourbooks" element={<PrivateRoute children={<YourBooksFrame />} />}/>
+        <Route exact path="/events" element={<Home />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/contact" element={<Home />} />
+        <Route exact path="/cart" element={<CartFrame />} />
+        <Route exact path="/login" element={<LoginPage />} />
+        <Route exact path='/reset-password/:passwordResetCode' element={<PasswordResetLandingPage />} />
+        <Route exact path='/verify-email/:verificationString' element={<EmailVerificationLandingPage />} />
+        <Route exact path='/please-verify' element={<PleaseVerifyEmailPage />} />
+        <Route exact path="/signup" element={<SignUpPage />} />
+        <Route exact path='/forgot-password' element={<ForgotPasswordPage />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
       {/* <Footer /> */}
     </Router>
