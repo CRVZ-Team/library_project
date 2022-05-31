@@ -6,8 +6,6 @@ import React from "react";
 const Pagination = ({booksPerPage, totalBooks, paginate}) => {
     const pageNumbers = [];
 
-    console.log(booksPerPage);
-    console.log(totalBooks);
     for (let i = 1; i <= Math.ceil(totalBooks / booksPerPage); i++) {
         pageNumbers.push(i);
     }

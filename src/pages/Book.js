@@ -5,12 +5,10 @@ import './Book.css';
 import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
-import { useToken } from "../auth/useToken";
 import { useNavigate } from "react-router-dom";
 
 export const Book = () => {
     const { id } = useParams();
-    const [data, setData] = useState({});
     const [book, setBook] = useState({});
     const [genres, setGenres] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -18,7 +16,6 @@ export const Book = () => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [active, setActive] = useState(false);
-    const [activeIds, setActiveIds] = useState([]);
     const user = useUser();
     const navigate = useNavigate();
 
@@ -32,12 +29,12 @@ export const Book = () => {
     const handleAddToCart = (subscription) => {
         const cartBook = book;
         let cart = [];
-        if (subscription == "month") {
+        if (subscription === "month") {
             cartBook.subs_id = 1;
             cartBook.exp_date = 30;
             cartBook.price = subscriptions.month;
         }
-        else if (subscription == "year") {
+        else if (subscription === "year") {
             cartBook.subs_id = 2;
             cartBook.exp_date = 365;
             cartBook.price = subscriptions.year;
@@ -48,7 +45,6 @@ export const Book = () => {
             cart = JSON.parse(localStorage.getItem("cart"));
             for (let i = 0; i < cart.length; i++) {
                 if (cart[i].id === cartBook.id) {
-                    console.log("Book already in cart");
                     cart.splice(i, 1);
                     break;
                 }
@@ -60,8 +56,7 @@ export const Book = () => {
     };
 
     const getData = async () => {
-        const { data } = await axios.get(`http://localhost:8080/api/book/${id}`);
-        setData(data);
+        const { data } = await axios.get(`${process.env.BACKEND}/api/book/${id}`);
         setBook(data.book);
         setGenres(data.genres);
         setReviews(data.reviews);
@@ -70,18 +65,16 @@ export const Book = () => {
 
     const usersBooks = async() => {
         //itterates through list of subscribes books and changes the submit buttons
-        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + user.id);
+        const { data } = await axios.get(`${process.env.BACKEND}/api/yourbooks/${user.id}`);
         for (var i = 0; i < data.length; i++) {
             if (data[i].id === id) {
-                console.log("Found");
                 setActive(true);
             }
         }
     };
 
     const onSubmitClicked = async () => {
-        console.log(user.id);
-        const { data } = await axios.post("http://localhost:8080/api/comment", {
+        const { data } = await axios.post(`${process.env.BACKEND}/api/comment`, {
             rating,
             comment,
             book_id: book.id,
@@ -119,14 +112,14 @@ export const Book = () => {
                 </div>
                 <hr/>
                 <div className="text-center">
-                {(() => {if (active == false && user != null) {
+                {(() => {if (active === false && user !== null) {
                     return(
                     <>
                         <button className="btn btn-outline-success" onClick={() => {handleAddToCart("month")}}>{subscriptions.month} dkk / month</button>
                         <button className="btn btn-outline-success" onClick={() => {handleAddToCart("year")}}>{subscriptions.year} dkk / year</button>
                         <button className="btn btn-outline-success"onClick={() => {handleAddToCart("")}}>{book.price} dkk / unlimited</button>
                     </>)
-                } else if (active == true && user != null) {
+                } else if (active === true && user !== null) {
                     return (
                         <button className="btn btn-outline-success">You have subscribed to this book.</button>
                     )

@@ -2,8 +2,6 @@ import { useUser } from "../auth/useUser";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../auth/useToken";
 import axios from 'axios';
-import CartItem from "./CartItem";
-import CartList from "./CartList";
 import "bootstrap/dist/css/bootstrap.css";
 
 const CartFrame = ({sum, setOveralSum, setBooks}) => {
@@ -20,7 +18,7 @@ const CartFrame = ({sum, setOveralSum, setBooks}) => {
             for (let i = 0; i < cartBooks.length; i++) {
                 books.push({'id': cartBooks[i].id, 'subs_id': cartBooks[i].subs_id, 'exp_date': cartBooks[i].exp_date});
                 }; 
-            const response = await axios.post('http://localhost:8080/api/invoice',{
+            const response = await axios.post(`${process.env.BACKEND}/api/invoice`,{
                 user_id: user.id,
                 user_email: user.email,
                 date: Date(),
