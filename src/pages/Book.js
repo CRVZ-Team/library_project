@@ -54,6 +54,8 @@ export const Book = () => {
         }
         cart.push(cartBook);
 
+        alert("Book added to cart!");
+
         localStorage.setItem('cart', JSON.stringify(cart));
     };
 
