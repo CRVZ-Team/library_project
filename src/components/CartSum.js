@@ -24,7 +24,7 @@ const CartFrame = ({sum, setOveralSum, setBooks}) => {
                 date: Date(),
                 total_price: sum,
                 books: books
-        });
+        }, {headers: {Authorization: `Bearer ${token}`}});
 
         if (response.status === 201) {
             localStorage.removeItem("cart");
