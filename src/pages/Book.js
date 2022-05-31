@@ -6,6 +6,7 @@ import { LeaveAReview } from "../components/LeaveAReview";
 import { useUser } from "../auth/useUser";
 import { ReviewAndComments } from "../components/ReviewAndComments";
 import { useNavigate } from "react-router-dom";
+import { useToken } from "../auth/useToken";
 
 export const Book = () => {
     const { id } = useParams();
@@ -16,6 +17,7 @@ export const Book = () => {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [active, setActive] = useState(false);
+    const [token, setToken] = useToken();
     const user = useUser();
     const navigate = useNavigate();
 
@@ -65,7 +67,7 @@ export const Book = () => {
 
     const usersBooks = async() => {
         //itterates through list of subscribes books and changes the submit buttons
-        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/yourbooks/${user.id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/yourbooks/${user.id}`, {headers: {Authorization: `Bearer ${token}`}});
         for (var i = 0; i < data.length; i++) {
             if (data[i].id === id) {
                 setActive(true);
