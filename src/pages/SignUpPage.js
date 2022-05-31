@@ -5,7 +5,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.css";
 
 export const SignUpPage = () => {
-    const [setToken] = useToken();
+    const [token, setToken] = useToken();
     const [errorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
