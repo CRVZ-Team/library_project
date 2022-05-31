@@ -23,7 +23,7 @@ function CatalogSideBar(props)
 
 
     const getAuthors = async() => {
-        const res = await axios.get("http://localhost:8080/api/filters/authors");
+        const res = await axios.get(`${process.env.BACKEND}/api/filters/authors`);
         setAuthors(res.data[0].authors);
         setYears(res.data[1].year_span);
         setGenres(res.data[2].genres);
@@ -77,7 +77,7 @@ function CatalogSideBar(props)
             }
         }
 
-        const { data } = await axios.post("http://localhost:8080/api/filter/books", {
+        const { data } = await axios.post(`${process.env.BACKEND}/api/filter/books`, {
             authors: updated_authors,
             genres: updated_genres,
             years: updated_years

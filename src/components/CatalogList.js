@@ -27,7 +27,7 @@ function CatalogList(props) {
     }, []);	
 
     const getData = async() => {
-        const { data } = await axios.get('http://localhost:8080/api/books');
+        const { data } = await axios.get(`${process.env.BACKEND}/api/books`);
         props.handleSettingBooks(data);
     };
 
