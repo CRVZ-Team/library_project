@@ -24,7 +24,7 @@ export const PasswordResetLandingPage = () => {
     if (isSuccess) return <PasswordResetSuccess />
 
     return (
-        <div>
+        <div className = "container">
             <h1>Reset Password</h1>
             <p>Please enter a new password</p>
             <p><input
