@@ -119,7 +119,7 @@ function CatalogSideBar(props)
                             ))}
                         </div>
                     <h5>Genre</h5>
-                    <div style={scrollable_small}>
+                    <div style={scrollable}>
                         {genres.map((genre, id) => (
                             <div>
                                 <input key={id} className="form-check-input" type="checkbox" value={genre.name} onChange={get_value} id="genre"/>
