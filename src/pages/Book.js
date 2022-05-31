@@ -71,7 +71,7 @@ export const Book = () => {
         //itterates through list of subscribes books and changes the submit buttons
         const { data } = await axios.get(`${process.env.REACT_APP_BACKEND}/api/yourbooks/${user.id}`, {headers: {Authorization: `Bearer ${token}`}});
         for (var i = 0; i < data.length; i++) {
-            if (data[i].id === id) {
+            if (data[i].id == id) {
                 setActive(true);
             }
         }
