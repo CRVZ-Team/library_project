@@ -6,15 +6,16 @@ import Pagination from './general/pagination';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { useUser } from '../auth/useUser';
+import { useToken } from '../auth/useToken';
 
 var book_list = [];
-var ls;
 
 function YourBooksList() {
     const [setCurrentPage] = useState(1);
     const [booksPerPage] = useState(8);
     const [searchParam, setSearchParam] = useSearchParams();
     const user = useUser();
+    const [token, ] = useToken();
 
 
 
@@ -30,11 +31,10 @@ function YourBooksList() {
 
     useEffect(() => {
         getData();
-    });	
+    }, []);	
 
     const getData = async() => {
-        console.log("Your Books get data");
-        const { data } = await axios.get("http://localhost:8080/api/yourbooks/" + user.id);
+        const { data } = await axios.get(`${process.env.BACKEND}/api/yourbooks/${user.id}`, {headers:{'Authorization': `Bearer ${token}`}});
         //setting books list which is used for sorting
         setBooks(data);
 
@@ -48,18 +48,15 @@ function YourBooksList() {
         
         if(param !== "") {
             setSearchParam({param});
-            console.log("Searching for: " + param);
             //book_list = props.books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
             book_list = books.filter(book => book.title.toLowerCase().includes(param.toLowerCase()) || book.author.toLowerCase().includes(param.toLowerCase()));
         }
         else {
             setSearchParam({param: ''});
-            console.log("Empty search")
             book_list = DefaultBookList;
         }
 
         setBooks(book_list);
-        console.log("Current book END OF SEARCH")
     };
 
     const form = {

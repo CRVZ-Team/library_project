@@ -28,7 +28,6 @@ const NavBar = () => {
         window.location.reload(false);
     }
 
-    console.log(user);
     return(
     <nav className="navbar menu">
         <h3 className="logo"><GiOwl size={65}/>Mrs. Who`s Library</h3>

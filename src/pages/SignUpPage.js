@@ -13,7 +13,7 @@ export const SignUpPage = () => {
     const navigate = useNavigate();
 
     const onSignUpClicked = async () => {
-        const response = await axios.post('http://localhost:8080/api/signup', {
+        const response = await axios.post(`${process.env.BACKEND}/api/signup`, {
             email: emailValue,
             password: passwordValue,
         });
