@@ -97,7 +97,7 @@ function CatalogSideBar(props)
                 <li key={"1"} className="nav-item" >
                 <h5>Book attributes</h5>
                 <h6>Authors</h6>
-                    <div style={scrollable_small}>
+                    <div style={scrollable}>
                         {authors.map((author, id) => (
                             <div>
                                 <input key={id} className="form-check-input"  type="checkbox" value={author.name} onChange={get_value} id="author"/>
