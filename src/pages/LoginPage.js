@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 export const LoginPage = () => {
     const [token, setToken] = useToken();
-    const [errorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
     const navigate = useNavigate();
@@ -15,7 +15,8 @@ export const LoginPage = () => {
         const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/login`, {
             email: emailValue,
             password: passwordValue,            
-        });
+        }).catch(error => {
+            setErrorMessage("Invalid email or password")});
 
         const { token } = response.data;
         setToken(token);
@@ -28,7 +29,8 @@ export const LoginPage = () => {
             <div className="row">
                 <div className="col mt-5">
                 <h1>Log In</h1>
-                {errorMessage && <div className="fail">{errorMessage}</div> }
+                
+                {errorMessage && <div className="text-danger">{errorMessage}</div> }
                 <p><input
                     id="email"
                     value={emailValue}
@@ -41,12 +43,16 @@ export const LoginPage = () => {
                     onChange={e => setPasswordValue(e.target.value)}
                     placeholder="password" /></p>
                 <hr />
-                <p><button
+                <div class="btn-group-vertical">
+                    <button
                     id="login_button"
+                    className="btn btn-outline-success"
                     disabled={!emailValue || !passwordValue}
-                    onClick={onLoginClicked}>Log In</button></p>
-                <p><button onClick={() => navigate('/forgot-password')}>Forgot your password?</button></p>
-                <p><button onClick={() => navigate('/signup')} >Don't have an account? Sign Up</button></p>
+                    onClick={onLoginClicked}>Log In</button>
+                    <button className="btn btn-outline-success" onClick={() => navigate('/forgot-password')}>Forgot your password?</button>
+                    <button className="btn btn-outline-success" onClick={() => navigate('/signup')} >Don't have an account? Sign Up</button> 
+                </div>
+                
             </div>
             </div>
             
