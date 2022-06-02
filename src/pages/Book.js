@@ -83,7 +83,7 @@ export const Book = () => {
             comment,
             book_id: book.id,
             user_id: user.id,
-        });
+        }, {headers: {Authorization: `Bearer ${token}`}});
 
         if (data === "success") {
             setRating(0);
