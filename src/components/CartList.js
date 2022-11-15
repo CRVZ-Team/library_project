@@ -1,79 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useToken } from "../auth/useToken";
-import axios from 'axios';
 import CartItem from "./CartItem";
 import "bootstrap/dist/css/bootstrap.css";
 
-
-const boks_db = [
-    {
-        id: 1,
-        title: "Testing title 1",
-        author: "roman",
-        description: "This is the testinng description for the book intended to be used for testing purposes",
-        year: "2020",
-        price: "23.4",
-        photo: "https://cdn5.tales.dk/thumbnail/400x0/00145/82828/cover.1598524649.jpg"
-    },
-    {
-        id: 2,
-        title: "Testing title 2",
-        author: "roman",
-        description: "This is the testinng description for the book intended to be used for testing purposes",
-        year: "2020",
-        price: "23.4",
-        photo: 'https://cdn6.tales.dk/00097/99927/cover.1606094417.jpg',
-
-    },
-    {
-        id: 3,
-        title: "Testing title 3",
-        author: "roman",
-        description: "This is the testinng description for the book intended to be used for testing purposes",
-        year: "2020",
-        price: "23.4",
-        photo: "https://cdn6.tales.dk/00112/20775/cover.1568831349.jpg"
-    },
-    {
-        id: 4,
-        title: "Testing title 4",
-        author: "roman",
-        description: "This is the testinng description for the book intended to be used for testing purposes",
-        year: "2020",
-        price: "23.4",
-    },
-    {
-        id: 5,
-        title: "Testing title 5",
-        author: "roman",
-        description: "This is the testinng description for the book intended to be used for testing purposes",
-        year: "2020",
-        price: "23.4",
-    },
-    {
-        id: 6,
-        title: "Testing title 6",
-        author: "roman",
-        description: "This is the testinng description for the book intended to be used for testing purposes",
-        year: "2020",
-        price: "23.4",
-    }
-]
-
-
-function CartList ({get_sum}) {
+function CartList ({get_sum, books, setBooks}) {
     const [token, setToken] = useToken();
     const [errorMessage, setErrorMessage] = useState('');
     const [retrieveList, setList] = useState('');
 
-    //set books list 
-    const [books, setBooks] = useState(boks_db);
-    const navigate = useNavigate();
-
     function removeBook(id) {
         const newList = books.filter(book => book.id !== id);
         setBooks(newList);
+        localStorage.setItem('cart', JSON.stringify(newList));
         calculate_sum(newList);
     }
 
@@ -87,9 +25,7 @@ function CartList ({get_sum}) {
 
     return (
         //Main text area
-        <div className="container text-center">
-            
-            
+        <div className="container text-center">           
             {errorMessage && <div className="fail">{errorMessage}</div> }
             {books.length <= 0 ? 
                 <>
@@ -97,7 +33,7 @@ function CartList ({get_sum}) {
                     <hr></hr>
                     <h4>Insert books into your cart.</h4>
                     <a href="/catalog">
-                        <button class="btn btn-success" >Look for books</button>
+                        <button className="btn btn-success" >Look for books</button>
                     </a>
                     
                 </>

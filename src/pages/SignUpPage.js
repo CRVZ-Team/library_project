@@ -6,20 +6,21 @@ import "bootstrap/dist/css/bootstrap.css";
 
 export const SignUpPage = () => {
     const [token, setToken] = useToken();
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue ] = useState('');
     const [confirmPasswordValue, setConfirmPasswordValue ] = useState('');
     const navigate = useNavigate();
 
     const onSignUpClicked = async () => {
-        const response = await axios.post('/api/signup', {
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND}/api/signup`, {
             email: emailValue,
             password: passwordValue,
         });
         const { token } = response.data;
         setToken(token);
-        navigate('/welcome');
+        navigate('/please-verify');
+        //ADD: {!isVerified && <div className="faill">You won't be able ... until you verify your email</div>}
     } 
 
     return (
